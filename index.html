@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dog Mitra veterinary clinic, Dewas. Book appointments, home visits, shop pet care essentials, and manage pet health records.">
+    <title>Dog Mitra | Veterinary Clinic & Pet Care Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Dog Mitra home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path class="paw-pad" d="M19 38c0-8 6-13 13-13s13 5 13 13c0 9-7 14-13 14s-13-5-13-14Z"/><circle class="paw-toe" cx="18" cy="24" r="6"/><circle class="paw-toe" cx="30" cy="17" r="6"/><circle class="paw-toe" cx="43" cy="24" r="6"/><path class="scope" d="M40 42c8 0 13-5 13-13v-5M53 24a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM31 43c-9 0-16-7-16-16V15"/></svg></span>
+        <span><strong>Dog Mitra</strong><small data-i18n="brandTag">Vet Clinic & Pet Care</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#shop" data-i18n="navShop">Shop</a>
+        <a href="#appointments" data-i18n="navBooking">Booking</a>
+        <a href="#admin" data-i18n="navAdmin">Admin</a><button class="admin-link" id="adminLoginButton" type="button" data-i18n="adminLogin">Admin Login</button>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="ghost-btn" id="languageToggle" type="button" aria-label="Switch language">हिंदी</button>
+        <a class="icon-btn" href="tel:+919754240177" aria-label="Call Dog Mitra">Call</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-media" role="img" aria-label="Veterinary clinic visual"></div>
+        <div class="hero-content">
+          <p class="eyebrow" data-i18n="heroEyebrow">Dog Mitra, Dewas</p>
+          <h1 data-i18n="heroTitle">Premium veterinary care, home visits, and pet essentials in one place.</h1>
+          <p class="hero-copy" data-i18n="heroCopy">Book appointments with Dr. Sanjeev Kumre, request home care, shop trusted products, and keep every pet record organized.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#appointments" data-i18n="bookNow">Book appointment</a>
+            <a class="secondary-btn" href="https://wa.me/919754240177" data-i18n="whatsapp">WhatsApp clinic</a>
+          </div>
+          <div class="quick-stats" aria-label="Clinic highlights">
+            <span><strong>99.5%</strong><small data-i18n="uptime">uptime target</small></span>
+            <span><strong>&lt;3s</strong><small data-i18n="load">page load goal</small></span>
+            <span><strong>8-12</strong><small data-i18n="review">week review</small></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-band" id="about">
+        <div><p class="eyebrow" data-i18n="aboutEyebrow">About the clinic</p><h2 data-i18n="aboutTitle">A digital-first pet care experience for Dewas families.</h2></div>
+        <p data-i18n="aboutCopy">Dog Mitra brings clinic appointments, home visits, hyper care services, online shopping, pet health records, and follow-ups into one responsive bilingual platform.</p>
+      </section>
+
+      <section class="section" id="services">
+        <div class="section-heading"><p class="eyebrow" data-i18n="servicesEyebrow">Care services</p><h2 data-i18n="servicesTitle">Designed around the daily needs of pets and clinic staff.</h2></div>
+        <div class="service-grid">
+          <article><span class="service-icon">+</span><h3 data-i18n="serviceClinic">Clinic appointments</h3><p data-i18n="serviceClinicCopy">Slot booking, status tracking, appointment history, and staff-side management.</p></article>
+          <article><span class="service-icon">H</span><h3 data-i18n="serviceHome">Home visit booking</h3><p data-i18n="serviceHomeCopy">Request doorstep care with address, pet details, preferred date, and care notes.</p></article>
+          <article><span class="service-icon">P</span><h3 data-i18n="serviceHyper">Hyper care services</h3><p data-i18n="serviceHyperCopy">Priority care workflows for vaccination, recovery, grooming, and wellness follow-ups.</p></article>
+          <article><span class="service-icon">R</span><h3 data-i18n="serviceRecords">Pet health records</h3><p data-i18n="serviceRecordsCopy">Medical notes, vaccination records, communication history, and purchase insights.</p></article>
+        </div>
+      </section>
+
+      <section class="section split" id="shop">
+        <div>
+          <p class="eyebrow" data-i18n="shopEyebrow">Pet shop</p>
+          <h2 data-i18n="shopTitle">Catalogue, filters, cart, checkout, and order tracking.</h2>
+          <p data-i18n="shopCopy">The MVP includes product management, inventory visibility, secure payments, customer accounts, reviews, and local order updates.</p>
+          <div class="shop-controls" aria-label="Product filters">
+            <button class="filter-chip active" type="button" data-filter="all" data-i18n="all">All</button>
+            <button class="filter-chip" type="button" data-filter="food" data-i18n="food">Food</button>
+            <button class="filter-chip" type="button" data-filter="care" data-i18n="care">Care</button>
+            <button class="filter-chip" type="button" data-filter="accessory" data-i18n="accessory">Accessory</button>
+          </div>
+        </div>
+        <div class="product-panel" aria-live="polite">
+          <div class="search-row">
+            <input id="productSearch" type="search" placeholder="Search pet products" data-i18n-placeholder="searchProducts">
+            <button class="icon-btn" id="cartButton" type="button" aria-label="View cart">Cart <span id="cartCount">0</span></button>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+        </div>
+      </section>
+
+      <section class="section appointments" id="appointments">
+        <div class="section-heading"><p class="eyebrow" data-i18n="bookingEyebrow">Appointment system</p><h2 data-i18n="bookingTitle">Book clinic visits and home visits in under a minute.</h2></div>
+        <form class="booking-form" id="bookingForm">
+          <label><span data-i18n="petParent">Pet parent</span><input name="parent" required placeholder="Full name" data-i18n-placeholder="fullName"></label>
+          <label><span data-i18n="petName">Pet name</span><input name="pet" required placeholder="Pet name" data-i18n-placeholder="petNamePh"></label>
+          <label><span data-i18n="bookingType">Booking type</span><select name="type"><option data-i18n="clinicVisit">Clinic visit</option><option data-i18n="homeVisit">Home visit</option><option data-i18n="hyperCare">Hyper care</option></select></label>
+          <label><span data-i18n="date">Preferred date</span><input name="date" required type="date"></label>
+          <label><span data-i18n="phone">Phone</span><input name="phone" required type="tel" placeholder="+91"></label>
+          <label class="wide"><span data-i18n="notes">Care notes</span><textarea name="notes" rows="4" placeholder="Symptoms, vaccination due date, or visit reason" data-i18n-placeholder="notesPh"></textarea></label>
+          <button class="primary-btn wide" type="submit" data-i18n="confirmBooking">Confirm booking</button>
+          <p class="form-status wide" id="bookingStatus" role="status"></p>
+        </form>
+      </section>
+
+      <section class="section admin-band" id="admin">
+        <div><p class="eyebrow" data-i18n="adminEyebrow">Admin portal + CRM</p><h2 data-i18n="adminTitle">A practical control center for products, appointments, customers, pets, and content.</h2></div>
+        <div class="dashboard">
+          <div class="metric"><span data-i18n="orders">Orders</span><strong>128</strong><small>+18%</small></div>
+          <div class="metric"><span data-i18n="appointments">Appointments</span><strong>42</strong><small>this week</small></div>
+          <div class="metric"><span data-i18n="inventory">Inventory alerts</span><strong>7</strong><small>low stock</small></div>
+          <div class="metric"><span data-i18n="followups">Follow-ups</span><strong>19</strong><small>due soon</small></div>
+        </div>
+        <div class="feature-list"><span data-i18n="cms">CMS</span><span data-i18n="rbac">Role-based access</span><span data-i18n="analytics">Analytics dashboard</span><span data-i18n="activityLogs">Activity logs</span><span data-i18n="backups">Backups</span><span data-i18n="vaccination">Vaccination records</span></div>
+      </section>
+
+      <section class="section gallery-testimonials" id="gallery">
+        <div class="gallery"><div class="gallery-tile large"></div><div class="gallery-tile"></div><div class="gallery-tile accent"></div></div>
+        <div>
+          <p class="eyebrow" data-i18n="trustEyebrow">Gallery + testimonials</p>
+          <h2 data-i18n="trustTitle">Warm, trustworthy proof for new pet parents.</h2>
+          <blockquote data-i18n="testimonial">"The clinic team made our dog comfortable and the follow-up reminders helped us stay on track."</blockquote>
+          <div class="faq-list" id="faq">
+            <details open><summary data-i18n="faq1">Can I book a home visit online?</summary><p data-i18n="faq1Ans">Yes. Choose Home visit in the booking form and add your address in the notes.</p></details>
+            <details><summary data-i18n="faq2">Will the website support Hindi?</summary><p data-i18n="faq2Ans">Yes. The MVP includes English and Hindi content switching.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section roadmap" id="blog">
+        <div class="section-heading"><p class="eyebrow" data-i18n="roadmapEyebrow">Product roadmap</p><h2 data-i18n="roadmapTitle">Launch the MVP, measure real usage, then expand carefully.</h2></div>
+        <div class="phase-grid">
+          <article><strong>Phase 1</strong><p data-i18n="phase1">Website, commerce, appointments, admin, CRM, SEO, security.</p></article>
+          <article><strong>Phase 2</strong><p data-i18n="phase2">Mobile apps, video consults, reminders, loyalty, subscriptions.</p></article>
+          <article><strong>Phase 3</strong><p data-i18n="phase3">AI pet care assistant, e-prescriptions, advanced CRM workflows.</p></article>
+          <article><strong>Phase 4</strong><p data-i18n="phase4">Multi-branch, franchise, delivery, BI, forecasting, marketplace.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div><h2>Dog Mitra</h2><p>Shop number 14, Amer Mohini Garden, Ujjain Rd, near Abhinav Hotel, Shivaji Nagar, Moti Bunglow, Dewas, Madhya Pradesh 455001</p><p><strong data-i18n="doctor">Doctor:</strong> Dr. Sanjeev Kumre</p></div>
+      <div class="footer-actions"><a class="primary-btn" href="tel:+919754240177">+91 97542 40177</a><a class="secondary-btn" href="https://maps.app.goo.gl/JwNZ55GysRrY5hSs5" target="_blank" rel="noreferrer" data-i18n="openMaps">Open Google Maps</a></div>
+    </footer>
+
+    <div class="cart-drawer" id="cartDrawer" aria-hidden="true">
+      <div class="cart-content"><button class="close-btn" id="closeCart" type="button" aria-label="Close cart">x</button><h2 data-i18n="cart">Cart</h2><div id="cartItems"></div><div class="cart-total"><span data-i18n="total">Total</span><strong id="cartTotal">Rs. 0</strong></div><div class="upi-box"><span data-i18n="upiPay">UPI payment number</span><strong>9754240177</strong><small data-i18n="upiHint">Use this number for UPI payments for now.</small></div><button class="primary-btn" id="upiCheckout" type="button" data-i18n="secureCheckout">Pay via UPI</button></div>
+    </div>
+
+    <script src="script.js"></script>
+  <div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle"><button class="close-btn" id="closeAdmin" type="button" aria-label="Close admin login">x</button><p class="eyebrow" data-i18n="adminSecure">Website management</p><h2 id="adminModalTitle" data-i18n="adminPortalLogin">Admin login</h2><form class="admin-form" id="adminLoginForm"><label><span data-i18n="adminEmail">Email or phone</span><input name="admin" required placeholder="admin@dogmitra.in"></label><label><span data-i18n="adminPassword">Password</span><input name="password" required type="password" placeholder="Enter password"></label><button class="primary-btn" type="submit" data-i18n="loginManage">Login to manage site</button><p class="form-status" id="adminStatus" role="status"></p></form><div class="admin-tools"><span data-i18n="manageProducts">Products</span><span data-i18n="manageAppointments">Appointments</span><span data-i18n="manageOrders">Orders</span><span data-i18n="manageContent">Content</span></div></div></div></body>
+</html>
