@@ -268,6 +268,10 @@ function applySettings() {
   if (footerHours && hoursLabel && hoursOpen && hoursClose) {
     footerHours.innerHTML = `<strong>Clinic hours:</strong> ${hoursLabel} ${hoursOpen} - ${hoursClose}`;
   }
+  const footerEmergency = document.querySelector("#footerEmergency");
+  if (footerEmergency && emergencyHours) {
+    footerEmergency.textContent = `${site.businessHours?.emergencyLabel || "Emergency Veterinary Assistance"}: ${emergencyHours}`;
+  }
 
   const emergencyCopy = document.querySelector('[data-i18n="serviceEmergencyCopy"]');
   if (emergencyCopy && emergencyHours) {
@@ -330,11 +334,27 @@ function updateBranding(branding) {
 }
 
 function updateSocialLinks(links) {
-  const footer = document.querySelector(".footer");
-  if (!footer) return;
-  footer.querySelectorAll("[data-social]").forEach((item) => item.remove());
-  const socialList = Object.entries(links).filter(([, value]) => Boolean(value));
-  if (!socialList.length) return;
+  const container = document.querySelector("#socialLinks");
+  if (!container) return;
+  container.innerHTML = "";
+  const socialIcons = {
+    instagram: "IG",
+    facebook: "FB",
+    youtube: "YT",
+    linkedin: "IN",
+    googleBusiness: "GB",
+  };
+  Object.entries(links)
+    .filter(([, value]) => Boolean(value))
+    .forEach(([key, value]) => {
+      const link = document.createElement("a");
+      link.href = value;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = socialIcons[key] || key;
+      link.setAttribute("aria-label", key);
+      container.appendChild(link);
+    });
 }
 
 function fillSettingsForm() {

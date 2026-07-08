@@ -160,6 +160,19 @@ summary { cursor: pointer; font-weight: 800; }
 .legal-section { background: #fff; }
 .footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 42px clamp(18px, 4vw, 56px); background: linear-gradient(180deg, var(--ink), #101815); color: white; }
 .footer p { color: rgba(255,255,255,0.74); max-width: 780px; }
+.social-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.social-links a {
+  min-width: 42px;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-weight: 800;
+}
 .cart-drawer { position: fixed; inset: 0; display: none; justify-content: flex-end; background: rgba(24, 32, 28, 0.42); z-index: 20; }
 .cart-drawer.open { display: flex; }
 .cart-content { width: min(420px, 100%); min-height: 100%; background: #fff; padding: 24px; box-shadow: var(--shadow); }
