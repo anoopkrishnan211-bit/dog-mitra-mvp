@@ -30,6 +30,13 @@ This folder contains the production backend for Dog Mitra.
 
 - `POST /auth/login`
 - `POST /auth/register-admin`
+- `POST /auth/logout`
+- `POST /auth/refresh`
+- `POST /auth/forgot-password`
+- `POST /auth/reset-password`
+- `POST /auth/change-password`
+- `GET /auth/sessions`
+- `DELETE /auth/sessions/:id`
 - `GET /health`
 - `GET|POST|PATCH|DELETE /staff`
 - `GET|POST|PATCH|DELETE /customers`
@@ -52,3 +59,4 @@ This folder contains the production backend for Dog Mitra.
 - All protected routes require `Authorization: Bearer <token>`.
 - Admin routes are reserved for the `admin` role unless noted otherwise.
 - CRUD behavior is implemented through reusable controller, service, and repository layers.
+- Initial super admin bootstrap can be provided via `SUPER_ADMIN_*` environment variables.

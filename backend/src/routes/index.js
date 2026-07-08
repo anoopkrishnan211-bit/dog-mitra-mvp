@@ -8,6 +8,13 @@ const router = express.Router();
 
 router.post("/auth/login", authController.login);
 router.post("/auth/register-admin", authController.registerAdmin);
+router.post("/auth/logout", authController.logout);
+router.post("/auth/refresh", authController.refresh);
+router.post("/auth/forgot-password", authController.forgotPassword);
+router.post("/auth/reset-password", authController.resetPassword);
+router.post("/auth/change-password", authenticate, authController.changePassword);
+router.get("/auth/sessions", authenticate, authController.sessions);
+router.delete("/auth/sessions/:id", authenticate, authController.revokeSession);
 
 const publicReadRoles = ["admin", "doctor", "receptionist", "inventory", "content", "support"];
 

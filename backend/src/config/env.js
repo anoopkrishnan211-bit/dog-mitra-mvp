@@ -11,6 +11,13 @@ const env = {
   corsOrigin: process.env.CORS_ORIGIN || "*",
   mongoUri: process.env.MONGODB_URI,
   mongoDbName: process.env.MONGODB_DB_NAME,
+  initialSuperAdmin: {
+    name: process.env.SUPER_ADMIN_NAME,
+    username: process.env.SUPER_ADMIN_USERNAME,
+    email: process.env.SUPER_ADMIN_EMAIL,
+    phone: process.env.SUPER_ADMIN_MOBILE,
+    password: process.env.SUPER_ADMIN_PASSWORD,
+  },
 };
 
 module.exports = { env };
