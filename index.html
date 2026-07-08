@@ -31,7 +31,7 @@
           "postalCode": "455001",
           "addressCountry": "IN"
         },
-        "telephone": "+918590324142",
+        "telephone": "",
         "founder": "Dr. Sanjeev Kumre",
         "areaServed": "Dewas",
         "paymentAccepted": "UPI, Cash",
@@ -58,7 +58,7 @@
       <div class="header-actions">
         <button class="ghost-btn" id="languageToggle" type="button" aria-label="Switch language">हिंदी</button>
         <button class="admin-link" id="adminLoginButton" type="button" data-i18n="staffLogin">Admin Login</button>
-        <a class="icon-btn" href="tel:+918590324142" aria-label="Call Dog Mitra">Call</a>
+        <a class="icon-btn" href="tel:" aria-label="Call Dog Mitra">Call</a>
       </div>
     </header>
 
@@ -70,7 +70,7 @@
           <p class="hero-copy" data-i18n="heroCopy">Consult Dr. Sanjeev Kumre, book home visits, manage vaccination care, and shop genuine pet health essentials from Dog Mitra.</p>
           <div class="hero-actions">
             <a class="primary-btn" href="#appointments" data-i18n="bookNow">Book appointment</a>
-            <a class="secondary-btn" href="https://wa.me/918590324142" data-i18n="whatsapp">WhatsApp clinic</a>
+            <a class="secondary-btn" href="https://wa.me/" data-i18n="whatsapp">WhatsApp clinic</a>
           </div>
           <div class="trust-strip" aria-label="Clinic trust highlights">
             <span><strong>4.8/5</strong><small data-i18n="rating">Google rating focus</small></span>
@@ -123,7 +123,7 @@
           <article><span class="service-icon">+</span><h3 data-i18n="serviceClinic">Clinic consultation</h3><p data-i18n="serviceClinicCopy">General checkups, illness review, treatment guidance, and follow-up planning.</p><a href="#appointments" data-i18n="bookService">Book now</a></article>
           <article><span class="service-icon">H</span><h3 data-i18n="serviceHome">Home visit</h3><p data-i18n="serviceHomeCopy">Doorstep care for pets that need familiar surroundings or easier handling.</p><a href="#appointments" data-i18n="bookService2">Book now</a></article>
           <article><span class="service-icon">V</span><h3 data-i18n="serviceVaccine">Vaccination care</h3><p data-i18n="serviceVaccineCopy">Vaccination planning, due-date reminders, and record support for dogs.</p><a href="#appointments" data-i18n="bookService3">Book now</a></article>
-          <article><span class="service-icon">E</span><h3 data-i18n="serviceEmergency">Emergency guidance</h3><p data-i18n="serviceEmergencyCopy">Quick call support to decide whether a clinic visit is needed immediately.</p><a href="tel:+918590324142" data-i18n="callNow">Call now</a></article>
+          <article><span class="service-icon">E</span><h3 data-i18n="serviceEmergency">Emergency guidance</h3><p data-i18n="serviceEmergencyCopy">Quick call support to decide whether a clinic visit is needed immediately.</p><a href="tel:" data-i18n="callNow">Call now</a></article>
         </div>
       </section>
 
@@ -186,7 +186,7 @@
           <blockquote data-i18n="testimonial">"The clinic team made our dog comfortable and helped us understand the next care steps clearly."</blockquote>
           <div class="faq-list" id="faq">
             <details open><summary data-i18n="faq1">Can I book a home visit online?</summary><p data-i18n="faq1Ans">Yes. Choose Home visit in the booking form and add your address in the notes.</p></details>
-            <details><summary data-i18n="faq2">Can I pay by UPI?</summary><p data-i18n="faq2Ans">Yes. Use 8590324142 for UPI payment and share the payment confirmation with the clinic.</p></details>
+            <details><summary data-i18n="faq2">Can I pay by UPI?</summary><p data-i18n="faq2Ans">Yes. Use the verified clinic number for UPI payment and share the payment confirmation with the clinic.</p></details>
             <details><summary data-i18n="faq3">Do you maintain vaccination records?</summary><p data-i18n="faq3Ans">The clinic can help track vaccination history and follow-up dates for returning customers.</p></details>
           </div>
         </div>
@@ -235,12 +235,12 @@
     </main>
 
     <footer class="footer" id="contact">
-      <div><h2>Dog Mitra</h2><p>Shop number 14, Amer Mohini Garden, Ujjain Rd, near Abhinav Hotel, Shivaji Nagar, Moti Bunglow, Dewas, Madhya Pradesh 455001</p><p><strong data-i18n="doctorLabel">Doctor:</strong> Dr. Sanjeev Kumre</p><p><strong data-i18n="hours">Clinic hours:</strong> Call for today's availability and home visit slots.</p></div>
-      <div class="footer-actions"><a class="primary-btn" href="tel:+918590324142">+91 85903 24142</a><a class="secondary-btn" href="https://maps.app.goo.gl/JwNZ55GysRrY5hSs5" target="_blank" rel="noreferrer" data-i18n="openMaps">Open Google Maps</a></div>
+      <div><h2>Dog Mitra</h2><p id="footerAddress"></p><p><strong data-i18n="doctorLabel">Doctor:</strong> Dr. Sanjeev Kumre</p><p id="footerHours"><strong data-i18n="hours">Clinic hours:</strong> Call for today's availability and home visit slots.</p></div>
+      <div class="footer-actions"><a class="primary-btn" id="footerCallLink" href="tel:">Call Now</a><a class="secondary-btn" id="footerMapsLink" href="https://maps.app.goo.gl/JwNZ55GysRrY5hSs5" target="_blank" rel="noreferrer" data-i18n="openMaps">Open Google Maps</a></div>
     </footer>
 
     <div class="cart-drawer" id="cartDrawer" aria-hidden="true">
-      <div class="cart-content"><button class="close-btn" id="closeCart" type="button" aria-label="Close cart">x</button><h2 data-i18n="cart">Cart</h2><div id="cartItems"></div><div class="cart-total"><span data-i18n="total">Total</span><strong id="cartTotal">Rs. 0</strong></div><div class="upi-box"><span data-i18n="upiPay">UPI payment number</span><strong>8590324142</strong><small data-i18n="upiHint">Use this number for UPI payments.</small></div><button class="primary-btn" id="upiCheckout" type="button" data-i18n="secureCheckout">Pay via UPI</button></div>
+      <div class="cart-content"><button class="close-btn" id="closeCart" type="button" aria-label="Close cart">x</button><h2 data-i18n="cart">Cart</h2><div id="cartItems"></div><div class="cart-total"><span data-i18n="total">Total</span><strong id="cartTotal">Rs. 0</strong></div><div class="upi-box"><span data-i18n="upiPay">UPI payment number</span><strong id="upiNumber"></strong><small id="upiHintText" data-i18n="upiHint">Use the verified clinic number for UPI payments.</small></div><button class="primary-btn" id="upiCheckout" type="button" data-i18n="secureCheckout">Pay via UPI</button></div>
     </div>
 
     <div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle"><button class="close-btn" id="closeAdmin" type="button" aria-label="Close admin login">x</button><p class="eyebrow" data-i18n="adminSecure">Website management</p><h2 id="adminModalTitle" data-i18n="adminPortalLogin">Admin Login</h2><form class="admin-form" id="adminLoginForm"><label><span data-i18n="adminEmail">Email or phone</span><input name="admin" required placeholder="admin@dogmitra.in"></label><label><span data-i18n="adminPassword">Password</span><input name="password" required type="password" placeholder="Enter password"></label><button class="primary-btn" type="submit" data-i18n="loginManage">Login to manage site</button><p class="form-status" id="adminStatus" role="status"></p></form><div class="admin-tools"><span data-i18n="manageProducts">Products</span><span data-i18n="manageAppointments">Appointments</span><span data-i18n="manageOrders">Orders</span><span data-i18n="manageContent">Content</span><span data-i18n="manageBlogs">News & Blogs</span><span data-i18n="manageEventsPanel">Events</span></div></div></div>

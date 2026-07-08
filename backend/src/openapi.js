@@ -17,6 +17,7 @@ const swaggerJsdoc = () => ({
     "/auth/change-password": { post: { summary: "Change password" } },
     "/auth/sessions": { get: { summary: "List active sessions" } },
     "/auth/sessions/{id}": { delete: { summary: "Revoke session" } },
+    "/settings": { get: { summary: "Get public settings" }, put: { summary: "Update settings" } },
     "/staff": { get: { summary: "List staff" }, post: { summary: "Create staff" } },
     "/staff/{id}": { get: { summary: "Get staff" }, patch: { summary: "Update staff" }, delete: { summary: "Delete staff" } },
     "/customers": { get: { summary: "List customers" }, post: { summary: "Create customer" } },

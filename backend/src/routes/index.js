@@ -2,6 +2,7 @@ const express = require("express");
 const { authController } = require("../modules/auth/auth.controller");
 const { authenticate, authorize } = require("../middlewares/auth");
 const { createResourceModule } = require("../modules/resourceFactory");
+const { settingsRouter } = require("./settings.routes");
 const models = require("../../models");
 
 const router = express.Router();
@@ -33,6 +34,7 @@ router.use("/blog-posts", createResourceModule(models.BlogPost, ["admin", "conte
 router.use("/faqs", createResourceModule(models.FAQ, ["admin", "content"]).router);
 router.use("/contact-information", createResourceModule(models.ContactInformation, ["admin", "content"]).router);
 router.use("/site-settings", createResourceModule(models.SiteSettings, ["admin"]).router);
+router.use("/settings", settingsRouter);
 
 router.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 router.get("/me", authenticate, authorize(...publicReadRoles), (req, res) => res.json({ user: req.user }));

@@ -94,7 +94,7 @@ const translations = {
     faq1: "\u0915\u094d\u092f\u093e \u092e\u0948\u0902 home visit online book \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0942\u0902?",
     faq1Ans: "\u0939\u093e\u0901\u0964 Booking form \u092e\u0947\u0902 Home visit \u091a\u0941\u0928\u0947\u0902 \u0914\u0930 notes \u092e\u0947\u0902 \u0905\u092a\u0928\u093e address add \u0915\u0930\u0947\u0902\u0964",
     faq2: "\u0915\u094d\u092f\u093e \u092e\u0948\u0902 UPI \u0938\u0947 pay \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0942\u0902?",
-    faq2Ans: "\u0939\u093e\u0901\u0964 UPI payment \u0915\u0947 \u0932\u093f\u090f 8590324142 use \u0915\u0930\u0947\u0902 \u0914\u0930 confirmation clinic \u0915\u0947 \u0938\u093e\u0925 share \u0915\u0930\u0947\u0902\u0964",
+    faq2Ans: "\u0939\u093e\u0901\u0964 UPI payment \u0915\u0947 \u0932\u093f\u090f clinic \u0915\u0947 verified number \u0915\u093e use \u0915\u0930\u0947\u0902 \u0914\u0930 confirmation share \u0915\u0930\u0947\u0902\u0964",
     faq3: "\u0915\u094d\u092f\u093e vaccination records maintain \u0939\u094b\u0924\u0947 \u0939\u0948\u0902?",
     faq3Ans: "Clinic returning customers \u0915\u0947 \u0932\u093f\u090f vaccination history \u0914\u0930 follow-up dates track \u0915\u0930\u0928\u0947 \u092e\u0947\u0902 help \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0948\u0964",
     newsEyebrow: "News & Blogs",
@@ -149,7 +149,7 @@ const translations = {
     manageBlogs: "News & Blogs",
     manageEventsPanel: "Events",
     adminWelcome: "Admin access request received. Secure access will be verified by the clinic administrator.",
-    upiReady: "UPI payment can be made on 8590324142. Please share the payment confirmation on WhatsApp.",
+    upiReady: "UPI payment can be made using the clinic's verified number. Please share the payment confirmation on WhatsApp.",
     added: "Cart में जोड़ा",
     emptyCart: "Cart खाली है।",
     bookingDone: "Booking request received. Clinic team will contact you shortly."
@@ -165,6 +165,158 @@ const cartCount = document.querySelector("#cartCount");
 const cartDrawer = document.querySelector("#cartDrawer");
 const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
+const settingsCache = {
+  contact: null,
+  site: null
+};
+
+async function loadSettings() {
+  try {
+    const response = await fetch("/api/settings");
+    if (!response.ok) return;
+    const data = await response.json();
+    settingsCache.contact = data.contact || null;
+    settingsCache.site = data.site || null;
+    applySettings();
+  } catch (error) {
+    console.warn("Settings load failed", error);
+  }
+}
+
+function normalizePhone(phone) {
+  return (phone || "").replace(/[^\d+]/g, "");
+}
+
+function applySettings() {
+  const contact = settingsCache.contact || {};
+  const site = settingsCache.site || {};
+  const displayPhone = contact.phone || site.contact?.phone;
+  const whatsapp = contact.whatsapp || site.contact?.whatsapp || displayPhone;
+  const email = contact.email || site.contact?.email;
+  const emergencyHours = contact.emergencyHours || site.businessHours?.emergencyHours;
+  const emergencyPhone = contact.emergencyPhone || displayPhone;
+  const mapsLink = contact.googleMapsLink;
+  const hoursLabel = site.businessHours?.display;
+  const hoursOpen = site.businessHours?.open;
+  const hoursClose = site.businessHours?.close;
+
+  const brandNameNodes = document.querySelectorAll(".brand strong, footer h2");
+  brandNameNodes.forEach((node) => { node.textContent = site.siteName || "Dog Mitra"; });
+  document.querySelectorAll(".brand small").forEach((node) => {
+    node.textContent = "Vet Clinic & Pet Care";
+  });
+
+  const heroTitle = document.querySelector('[data-i18n="heroTitle"]');
+  if (heroTitle && site.homepageHeroTitle) heroTitle.textContent = site.homepageHeroTitle;
+  const heroCopy = document.querySelector('[data-i18n="heroCopy"]');
+  if (heroCopy && site.homepageHeroSubtitle) heroCopy.textContent = site.homepageHeroSubtitle;
+
+  const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+  phoneLinks.forEach((link) => {
+    if (displayPhone) link.href = `tel:${normalizePhone(displayPhone)}`;
+  });
+  const whatsappLinks = document.querySelectorAll('a[href*="wa.me/"]');
+  whatsappLinks.forEach((link) => {
+    if (whatsapp) link.href = `https://wa.me/${normalizePhone(whatsapp)}`;
+  });
+
+  const footerCallLink = document.querySelector("#footerCallLink");
+  if (footerCallLink && displayPhone) footerCallLink.href = `tel:${normalizePhone(displayPhone)}`;
+
+  const footerAddress = document.querySelector("#footerAddress");
+  if (footerAddress && contact.address) {
+    footerAddress.textContent = [
+      contact.clinicName,
+      contact.address.line1,
+      contact.address.line2,
+      `${contact.address.city}, ${contact.address.state} - ${contact.address.pincode}`,
+      contact.address.country === "IN" ? "India" : contact.address.country,
+    ].filter(Boolean).join(", ");
+  }
+
+  const footerHours = document.querySelector("#footerHours");
+  if (footerHours && hoursLabel && hoursOpen && hoursClose) {
+    footerHours.innerHTML = `<strong>Clinic hours:</strong> ${hoursLabel} ${hoursOpen} - ${hoursClose}`;
+  }
+
+  const emergencyCopy = document.querySelector('[data-i18n="serviceEmergencyCopy"]');
+  if (emergencyCopy && emergencyHours) {
+    emergencyCopy.textContent = `${emergencyHours}. Quick call support to decide whether a clinic visit is needed immediately.`;
+  }
+
+  const faqUpi = document.querySelector('[data-i18n="faq2Ans"]');
+  if (faqUpi && displayPhone) {
+    faqUpi.textContent = `Yes. Use ${normalizePhone(displayPhone)} for UPI payment and share the payment confirmation with the clinic.`;
+  }
+
+  const upiStrong = document.querySelector(".upi-box strong");
+  if (upiStrong && displayPhone) upiStrong.textContent = normalizePhone(displayPhone);
+
+  const upiHint = document.querySelector('[data-i18n="upiHint"]');
+  if (upiHint && displayPhone) upiHint.textContent = `Use ${normalizePhone(displayPhone)} for UPI payments.`;
+
+  const doctorHours = document.querySelector('[data-i18n="timingsValue"]');
+  if (doctorHours && hoursOpen && hoursClose) {
+    doctorHours.textContent = `${hoursLabel || "Monday - Saturday"} ${hoursOpen} - ${hoursClose}`;
+  }
+
+  const contactEmailNodes = document.querySelectorAll(".footer p, .admin-form, .section-heading");
+  if (email) {
+    document.documentElement.setAttribute("data-clinic-email", email);
+  }
+
+  const emergencyContactLinks = document.querySelectorAll('[href^="tel:"]');
+  emergencyContactLinks.forEach((link) => {
+    if (emergencyPhone) link.href = `tel:${normalizePhone(emergencyPhone)}`;
+  });
+
+  if (mapsLink) {
+    const mapsLinkEl = document.querySelector("#footerMapsLink");
+    if (mapsLinkEl) mapsLinkEl.href = mapsLink;
+  }
+
+  updateSocialLinks(site.socialLinks || {});
+  updateBranding(site.branding || {});
+  updateSchemaData({ contact, site });
+}
+
+function updateBranding(branding) {
+  const logo = branding.logoUrl || "/assets/dog-mitra-logo.png";
+  const brandImage = document.querySelector(".brand-mark img");
+  if (brandImage) brandImage.src = logo;
+  const favicon = document.querySelector('link[rel="icon"]');
+  if (favicon) favicon.href = logo;
+  const appleTouch = document.querySelector('link[rel="apple-touch-icon"]');
+  if (appleTouch) appleTouch.href = logo;
+}
+
+function updateSocialLinks(links) {
+  const footer = document.querySelector(".footer");
+  if (!footer) return;
+  footer.querySelectorAll("[data-social]").forEach((item) => item.remove());
+  const socialList = Object.entries(links).filter(([, value]) => Boolean(value));
+  if (!socialList.length) return;
+}
+
+function updateSchemaData({ contact, site }) {
+  const script = document.querySelector('script[type="application/ld+json"]');
+  if (!script) return;
+  try {
+    const data = JSON.parse(script.textContent);
+    const address = contact.address || {};
+    data.name = site.siteName || data.name;
+    data.telephone = normalizePhone(contact.phone || site.contact?.phone || "");
+    data.email = contact.email || site.contact?.email || "";
+    data.address.streetAddress = [address.line1, address.line2].filter(Boolean).join(", ") || data.address.streetAddress;
+    data.address.addressLocality = address.city || data.address.addressLocality;
+    data.address.addressRegion = address.state || data.address.addressRegion;
+    data.address.postalCode = address.pincode || data.address.postalCode;
+    data.hasMap = contact.googleMapsLink || data.hasMap;
+    script.textContent = JSON.stringify(data, null, 2);
+  } catch (error) {
+    console.warn("Schema update failed", error);
+  }
+}
 
 function money(value) { return "Rs. " + value.toLocaleString("en-IN"); }
 function t(key, fallback) { return currentLang === "hi" ? (translations.hi[key] || fallback) : fallback; }
@@ -246,6 +398,7 @@ document.querySelector("#languageToggle").addEventListener("click", function() {
 
 renderProducts();
 renderCart();
+loadSettings();
 
 const adminModal = document.querySelector("#adminModal");
 const adminLoginButton = document.querySelector("#adminLoginButton");
@@ -288,6 +441,6 @@ if (adminLoginForm) {
 
 if (upiCheckout) {
   upiCheckout.addEventListener("click", function() {
-    alert(t("upiReady", "UPI payment can be made on 8590324142. Please share the payment confirmation on WhatsApp."));
+    alert(t("upiReady", "UPI payment can be made using the clinic's verified number. Please share the payment confirmation on WhatsApp."));
   });
 }
