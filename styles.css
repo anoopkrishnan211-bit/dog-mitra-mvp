@@ -194,6 +194,9 @@ summary { cursor: pointer; font-weight: 800; }
 .settings-grid textarea { min-height: 96px; }
 .settings-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .settings-grid .wide { grid-column: 1 / -1; }
+.settings-grid input[type="checkbox"] { width: auto; justify-self: start; transform: translateY(2px); }
+.settings-grid label:has(input[type="checkbox"]) { display: flex; align-items: center; gap: 10px; }
+.settings-grid label:has(input[type="checkbox"]) span { margin: 0; }
 .news-section .content-grid,
 .events-section .event-list,
 .policy-grid,

@@ -170,6 +170,8 @@ const settingsForm = document.querySelector("#settingsForm");
 const settingsStatus = document.querySelector("#settingsStatus");
 const upiNumber = document.querySelector("#upiNumber");
 const upiHintText = document.querySelector("#upiHintText");
+const paymentMethodText = document.querySelector("#paymentMethodText");
+const footerEmail = document.querySelector("#footerEmail");
 const settingsCache = {
   contact: null,
   site: null
@@ -263,6 +265,7 @@ function applySettings() {
       contact.address.country === "IN" ? "India" : contact.address.country,
     ].filter(Boolean).join(", ");
   }
+  if (footerEmail && email) footerEmail.textContent = `Clinic email: ${email}`;
 
   const footerHours = document.querySelector("#footerHours");
   if (footerHours && hoursLabel && hoursOpen && hoursClose) {
@@ -300,6 +303,7 @@ function applySettings() {
   if (upiHint && displayPhone) upiHint.textContent = `Use ${normalizePhone(displayPhone)} for UPI payments.`;
   if (upiNumber && displayPhone) upiNumber.textContent = normalizePhone(displayPhone);
   if (upiHintText && displayPhone) upiHintText.textContent = `Use ${displayPhone} for UPI payments.`;
+  if (paymentMethodText && site.payment?.method) paymentMethodText.textContent = `Payment method: ${site.payment.method}`;
 
   const doctorHours = document.querySelector('[data-i18n="timingsValue"]');
   if (doctorHours && hoursOpen && hoursClose) {
@@ -366,6 +370,8 @@ function fillSettingsForm() {
     if (field && value !== undefined && value !== null) field.value = value;
   };
   setValue("site.siteName", site.siteName);
+  setValue("site.languageDefault", site.languageDefault);
+  setValue("site.enabledLanguages", Array.isArray(site.enabledLanguages) ? site.enabledLanguages.join(", ") : site.enabledLanguages);
   setValue("contact.phone", contact.phone);
   setValue("contact.whatsapp", contact.whatsapp);
   setValue("contact.email", contact.email);
@@ -384,6 +390,12 @@ function fillSettingsForm() {
   setValue("site.businessHours.close", site.businessHours?.close);
   setValue("site.payment.upiId", site.payment?.upiId);
   setValue("site.payment.method", site.payment?.method);
+  setValue("site.payment.qrCodeUrl", site.payment?.qrCodeUrl);
+  setValue("site.payment.paymentScreenshotUrl", site.payment?.paymentScreenshotUrl);
+  const approval = settingsForm.elements.namedItem("site.payment.approvalRequired");
+  if (approval) approval.checked = !!site.payment?.approvalRequired;
+  const razorpay = settingsForm.elements.namedItem("site.payment.razorpayEnabled");
+  if (razorpay) razorpay.checked = !!site.payment?.razorpayEnabled;
   setValue("site.smtp.host", site.smtp?.host);
   setValue("site.smtp.port", site.smtp?.port);
   setValue("site.smtp.username", site.smtp?.username);
@@ -428,6 +440,8 @@ function serializeSettingsForm() {
     },
     site: {
       siteName: get("site.siteName"),
+      languageDefault: get("site.languageDefault"),
+      enabledLanguages: get("site.enabledLanguages") ? get("site.enabledLanguages").split(",").map((s) => s.trim()).filter(Boolean) : [],
       businessHours: {
         display: get("site.businessHours.display"),
         open: get("site.businessHours.open"),
@@ -436,6 +450,10 @@ function serializeSettingsForm() {
       payment: {
         upiId: get("site.payment.upiId"),
         method: get("site.payment.method"),
+        qrCodeUrl: get("site.payment.qrCodeUrl"),
+        paymentScreenshotUrl: get("site.payment.paymentScreenshotUrl"),
+        approvalRequired: Boolean(settingsForm.elements.namedItem("site.payment.approvalRequired")?.checked),
+        razorpayEnabled: Boolean(settingsForm.elements.namedItem("site.payment.razorpayEnabled")?.checked),
       },
       smtp: {
         host: get("site.smtp.host"),
