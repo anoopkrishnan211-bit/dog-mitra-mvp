@@ -94,7 +94,7 @@ const translations = {
     faq1: "\u0915\u094d\u092f\u093e \u092e\u0948\u0902 home visit online book \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0942\u0902?",
     faq1Ans: "\u0939\u093e\u0901\u0964 Booking form \u092e\u0947\u0902 Home visit \u091a\u0941\u0928\u0947\u0902 \u0914\u0930 notes \u092e\u0947\u0902 \u0905\u092a\u0928\u093e address add \u0915\u0930\u0947\u0902\u0964",
     faq2: "\u0915\u094d\u092f\u093e \u092e\u0948\u0902 UPI \u0938\u0947 pay \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0942\u0902?",
-    faq2Ans: "\u0939\u093e\u0901\u0964 UPI payment \u0915\u0947 \u0932\u093f\u090f 9754240177 use \u0915\u0930\u0947\u0902 \u0914\u0930 confirmation clinic \u0915\u0947 \u0938\u093e\u0925 share \u0915\u0930\u0947\u0902\u0964",
+    faq2Ans: "\u0939\u093e\u0901\u0964 UPI payment \u0915\u0947 \u0932\u093f\u090f 8590324142 use \u0915\u0930\u0947\u0902 \u0914\u0930 confirmation clinic \u0915\u0947 \u0938\u093e\u0925 share \u0915\u0930\u0947\u0902\u0964",
     faq3: "\u0915\u094d\u092f\u093e vaccination records maintain \u0939\u094b\u0924\u0947 \u0939\u0948\u0902?",
     faq3Ans: "Clinic returning customers \u0915\u0947 \u0932\u093f\u090f vaccination history \u0914\u0930 follow-up dates track \u0915\u0930\u0928\u0947 \u092e\u0947\u0902 help \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0948\u0964",
     newsEyebrow: "News & Blogs",
@@ -149,7 +149,7 @@ const translations = {
     manageBlogs: "News & Blogs",
     manageEventsPanel: "Events",
     adminWelcome: "Admin access request received. Secure access will be verified by the clinic administrator.",
-    upiReady: "UPI payment can be made on 9754240177. Please share the payment confirmation on WhatsApp.",
+    upiReady: "UPI payment can be made on 8590324142. Please share the payment confirmation on WhatsApp.",
     added: "Cart में जोड़ा",
     emptyCart: "Cart खाली है।",
     bookingDone: "Booking request received. Clinic team will contact you shortly."
@@ -288,6 +288,6 @@ if (adminLoginForm) {
 
 if (upiCheckout) {
   upiCheckout.addEventListener("click", function() {
-    alert(t("upiReady", "UPI payment can be made on 9754240177. Please share the payment confirmation on WhatsApp."));
+    alert(t("upiReady", "UPI payment can be made on 8590324142. Please share the payment confirmation on WhatsApp."));
   });
 }

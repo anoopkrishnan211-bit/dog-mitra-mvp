@@ -119,7 +119,7 @@ Current behavior is front-end only. A production version should store this reque
 3. Customer adds products to cart.
 4. Customer opens cart.
 5. Customer sees total amount and UPI payment number.
-6. Customer pays via UPI using `9754240177`.
+6. Customer pays via UPI using `8590324142`.
 
 Current behavior is front-end only. A production version should include order persistence, payment verification, invoices, and order tracking.
 
@@ -291,4 +291,3 @@ The next phase should be approved only after measurable adoption and clear busin
 ## Project Management Notes
 
 This MVP should be treated as a validation and stakeholder review artifact. It clarifies the product direction, user journeys, operating model, and future development scope. The next development milestone should convert the static MVP into a backed application with real data persistence, secure access, and measurable analytics.
-
