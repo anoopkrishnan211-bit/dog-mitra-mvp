@@ -1,0 +1,17 @@
+module.exports = {
+  Staff: require("./Staff"),
+  Customer: require("./Customer"),
+  Pet: require("./Pet"),
+  Appointment: require("./Appointment"),
+  Product: require("./Product"),
+  Category: require("./Category"),
+  Inventory: require("./Inventory"),
+  Order: require("./Order"),
+  Testimonial: require("./Testimonial"),
+  Gallery: require("./Gallery"),
+  Service: require("./Service"),
+  BlogPost: require("./BlogPost"),
+  FAQ: require("./FAQ"),
+  ContactInformation: require("./ContactInformation"),
+  SiteSettings: require("./SiteSettings"),
+};
