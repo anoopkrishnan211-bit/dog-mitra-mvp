@@ -124,7 +124,7 @@ p { color: var(--muted); line-height: 1.65; }
 .trust-grid span { color: var(--muted); font-weight: 700; }
 .doctor-section { background: #fff; }
 .doctor-card { display: grid; grid-template-columns: minmax(280px, 0.8fr) minmax(300px, 1.2fr); gap: clamp(24px, 5vw, 58px); align-items: center; }
-.doctor-photo { min-height: 360px; border-radius: 8px; border: 1px solid var(--line); background: linear-gradient(0deg, rgba(31,107,79,.08), rgba(31,107,79,.02)), url("assets/rajapalayam.svg") center/cover; box-shadow: var(--shadow); }
+.doctor-photo { min-height: 360px; border-radius: 8px; border: 1px solid var(--line); background: linear-gradient(0deg, rgba(31,107,79,.08), rgba(31,107,79,.02)), url("https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1200&q=80") center/cover; box-shadow: var(--shadow); }
 .profile-list { display: grid; gap: 12px; margin: 22px 0 0; }
 .profile-list div { padding: 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--mist); }
 dt { font-weight: 800; color: var(--forest); }
@@ -148,7 +148,6 @@ input, select, textarea { width: 100%; border: 1px solid var(--line); border-rad
 .booking-form label span { display: block; margin-bottom: 8px; font-weight: 800; }
 .wide { grid-column: 1 / -1; }
 .form-status { margin: 0; font-weight: 800; color: var(--forest); }
-.admin-band { background: var(--sky); }
 .dashboard { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .metric { padding: 18px; }
 .metric strong { display: block; font-size: 34px; margin: 8px 0; }
@@ -232,7 +231,6 @@ summary { cursor: pointer; font-weight: 800; }
 .news-section { background: #fff; }
 .events-section { background: var(--mist); }
 .content-date { display: inline-flex; width: max-content; padding: 6px 10px; border-radius: 8px; background: var(--sky); color: var(--forest); font-size: 12px; font-weight: 800; text-transform: uppercase; }
-.admin-control-card { border-color: rgba(31, 107, 79, 0.34) !important; background: linear-gradient(180deg, #ffffff, #f5fbf7) !important; }
 .event-list { display: grid; gap: 14px; max-width: 980px; }
 .event-list article { display: grid; grid-template-columns: 74px 1fr; gap: 18px; align-items: start; padding: 18px; }
 .event-date { display: grid; place-items: center; min-height: 74px; border-radius: 8px; background: var(--forest); color: #fff; text-align: center; }

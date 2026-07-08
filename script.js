@@ -1,8 +1,8 @@
 const products = [
-  { id: 1, name: "Indian Pariah Puppy Food", hi: "\u0907\u0902\u0921\u093f\u092f\u0928 \u092a\u0930\u093f\u092f\u093e \u092a\u092a\u0940 \u092b\u0942\u0921", category: "food", price: 1299, image: "assets/indian-pariah.svg" },
-  { id: 2, name: "Rajapalayam Coat Care", hi: "\u0930\u093e\u091c\u093e\u092a\u093e\u0932\u092f\u092e \u0915\u094b\u091f \u0915\u0947\u092f\u0930", category: "care", price: 499, image: "assets/rajapalayam.svg" },
-  { id: 3, name: "Mudhol Hound Harness", hi: "\u092e\u0941\u0927\u094b\u0932 \u0939\u093e\u0909\u0902\u0921 \u0939\u093e\u0930\u094d\u0928\u0947\u0938", category: "accessory", price: 799, image: "assets/mudhol-hound.svg" },
-  { id: 4, name: "Kombai Dental Chew Pack", hi: "\u0915\u094b\u092e\u094d\u092c\u0908 \u0921\u0947\u0902\u091f\u0932 \u091a\u094d\u092f\u0942 \u092a\u0948\u0915", category: "care", price: 349, image: "assets/kombai.svg" }
+  { id: 1, name: "Chicken & Rice Puppy Formula", hi: "\u0905\u0921\u094d\u092f\u0942\u0932\u094d\u091f \u092a\u092a\u0940 \u092b\u0942\u0921", category: "food", price: 1299, image: "https://images.unsplash.com/photo-1546447147-3fc2b2c2c3f8?auto=format&fit=crop&w=900&q=80" },
+  { id: 2, name: "Gentle Coat & Skin Wash", hi: "\u0938\u094d\u0915\u093f\u0928 \u0915\u0947\u092f\u0930 \u0935\u093e\u0936", category: "care", price: 499, image: "https://images.unsplash.com/photo-1558929995-45d0f8d9f7f8?auto=format&fit=crop&w=900&q=80" },
+  { id: 3, name: "Comfort Harness", hi: "\u0915\u092e\u094d\u092b\u094b\u0930\u094d\u091f \u0939\u093e\u0930\u094d\u0928\u0947\u0938", category: "accessory", price: 799, image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" },
+  { id: 4, name: "Dental Chew Pack", hi: "\u0921\u0947\u0902\u091f\u0932 \u091a\u094d\u092f\u0942 \u092a\u0948\u0915", category: "care", price: 349, image: "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=900&q=80" }
 ];
 
 const translations = {
