@@ -228,6 +228,16 @@ function applySettings() {
   if (heroTitle && site.homepageHeroTitle) heroTitle.textContent = site.homepageHeroTitle;
   const heroCopy = document.querySelector('[data-i18n="heroCopy"]');
   if (heroCopy && site.homepageHeroSubtitle) heroCopy.textContent = site.homepageHeroSubtitle;
+  const doctorName = document.querySelector("#doctorName");
+  if (doctorName && site.doctor?.name) doctorName.textContent = site.doctor.name;
+  const doctorBio = document.querySelector('[data-i18n="doctorBio"]');
+  if (doctorBio && site.doctor?.bio) doctorBio.textContent = site.doctor.bio;
+  const specializationValue = document.querySelector('[data-i18n="specializationValue"]');
+  if (specializationValue && site.doctor?.specialization) specializationValue.textContent = site.doctor.specialization;
+  const languagesValue = document.querySelector('[data-i18n="languagesValue"]');
+  if (languagesValue && site.doctor?.languages) languagesValue.textContent = site.doctor.languages;
+  const timingsValue = document.querySelector('[data-i18n="timingsValue"]');
+  if (timingsValue && site.doctor?.timings) timingsValue.textContent = site.doctor.timings;
   if (site.seo?.title) {
     document.title = site.seo.title;
     const ogTitle = document.querySelector('meta[property="og:title"]');
@@ -370,6 +380,11 @@ function fillSettingsForm() {
     if (field && value !== undefined && value !== null) field.value = value;
   };
   setValue("site.siteName", site.siteName);
+  setValue("site.doctor.name", site.doctor?.name);
+  setValue("site.doctor.bio", site.doctor?.bio);
+  setValue("site.doctor.specialization", site.doctor?.specialization);
+  setValue("site.doctor.languages", site.doctor?.languages);
+  setValue("site.doctor.timings", site.doctor?.timings);
   setValue("site.languageDefault", site.languageDefault);
   setValue("site.enabledLanguages", Array.isArray(site.enabledLanguages) ? site.enabledLanguages.join(", ") : site.enabledLanguages);
   setValue("contact.phone", contact.phone);
@@ -440,6 +455,13 @@ function serializeSettingsForm() {
     },
     site: {
       siteName: get("site.siteName"),
+      doctor: {
+        name: get("site.doctor.name"),
+        bio: get("site.doctor.bio"),
+        specialization: get("site.doctor.specialization"),
+        languages: get("site.doctor.languages"),
+        timings: get("site.doctor.timings"),
+      },
       languageDefault: get("site.languageDefault"),
       enabledLanguages: get("site.enabledLanguages") ? get("site.enabledLanguages").split(",").map((s) => s.trim()).filter(Boolean) : [],
       businessHours: {

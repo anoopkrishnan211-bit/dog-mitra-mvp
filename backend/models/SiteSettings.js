@@ -10,6 +10,13 @@ const SiteSettingsSchema = buildBaseSchema({
   accentColor: { type: String, trim: true, default: "#f0b44c" },
   homepageHeroTitle: { type: String, trim: true, maxlength: 180 },
   homepageHeroSubtitle: { type: String, trim: true, maxlength: 400 },
+  doctor: {
+    name: { type: String, trim: true, maxlength: 160, default: "Dr. Sanjeev Kumre" },
+    bio: { type: String, trim: true, maxlength: 1000 },
+    specialization: { type: String, trim: true, maxlength: 240 },
+    languages: { type: String, trim: true, maxlength: 120 },
+    timings: { type: String, trim: true, maxlength: 200 },
+  },
   bookAppointmentCta: { type: String, trim: true, maxlength: 80, default: "Book Appointment" },
   exploreShopCta: { type: String, trim: true, maxlength: 80, default: "Explore Shop" },
   footerNote: { type: String, trim: true, maxlength: 500 },

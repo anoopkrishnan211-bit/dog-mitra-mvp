@@ -39,6 +39,13 @@ const DEFAULT_SITE = {
   accentColor: "#f0b44c",
   homepageHeroTitle: "Compassionate veterinary care for dogs, pets, and families in Dewas.",
   homepageHeroSubtitle: "Clinic consultations, home visits, preventive care, genuine pet products, and reliable support from one trusted team.",
+  doctor: {
+    name: "Dr. Sanjeev Kumre",
+    bio: "Dr. Sanjeev Kumre leads Dog Mitra with a focus on dog wellness, preventive care, vaccination guidance, everyday illness support, and clear advice for pet parents.",
+    specialization: "Dog consultation, vaccination, wellness and home care",
+    languages: "English, Hindi",
+    timings: "Call or WhatsApp for today's availability",
+  },
   bookAppointmentCta: "Book Appointment",
   exploreShopCta: "Explore Shop",
   footerNote: "Emergency veterinary assistance available 24/7.",
