@@ -81,7 +81,7 @@
           <p class="emergency-banner" id="heroEmergency">Emergency Veterinary Assistance: Available 24 Hours, 7 Days a Week</p>
         </div>
         <figure class="hero-photo">
-          <img src="https://images.unsplash.com/photo-1558944351-c9f1f3b3e4f3?auto=format&fit=crop&w=1400&q=80" alt="Dog receiving compassionate veterinary care" loading="eager">
+          <img data-media-slot="heroImage" src="https://images.unsplash.com/photo-1558944351-c9f1f3b3e4f3?auto=format&fit=crop&w=1400&q=80" alt="Dog receiving compassionate veterinary care" loading="eager">
           <figcaption data-i18n="heroCaption">Clinic consultations, vaccination care, wellness support, and home visits.</figcaption>
         </figure>
       </section>
@@ -101,7 +101,9 @@
 
       <section class="section doctor-section" id="doctor">
           <div class="doctor-card">
-            <div class="doctor-photo" role="img" aria-label="Doctor profile area"></div>
+            <div class="doctor-photo-wrap">
+              <img data-media-slot="doctorPortrait" src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1200&q=80" alt="Veterinarian with a dog in a clinic" loading="lazy">
+            </div>
             <div>
               <p class="eyebrow" data-i18n="doctorEyebrow">Doctor profile</p>
             <h2 id="doctorName">Doctor Name</h2>
@@ -169,9 +171,9 @@
 
       <section class="section gallery-testimonials" id="gallery">
         <div class="gallery">
-          <img src="https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=1200&q=80" alt="Veterinarian examining a dog" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=80" alt="Happy dog in a bright clinic" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80" alt="Warm veterinary consultation scene" loading="lazy">
+          <img data-media-slot="galleryOne" src="https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=1200&q=80" alt="Veterinarian examining a dog" loading="lazy">
+          <img data-media-slot="galleryTwo" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=80" alt="Happy dog in a bright clinic" loading="lazy">
+          <img data-media-slot="galleryThree" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80" alt="Warm veterinary consultation scene" loading="lazy">
         </div>
         <div>
           <p class="eyebrow" data-i18n="reviewEyebrow">Reviews and care stories</p>

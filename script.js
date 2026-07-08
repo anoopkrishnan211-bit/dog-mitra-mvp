@@ -338,6 +338,7 @@ function applySettings() {
 
   updateSocialLinks(site.socialLinks || {});
   updateBranding(site.branding || {});
+  updateMediaSlots(site);
   updateSchemaData({ contact, site });
 }
 
@@ -349,6 +350,17 @@ function updateBranding(branding) {
   if (favicon) favicon.href = logo;
   const appleTouch = document.querySelector('link[rel="apple-touch-icon"]');
   if (appleTouch) appleTouch.href = logo;
+}
+
+function updateMediaSlots(site) {
+  const media = site.media || {};
+  document.querySelectorAll("[data-media-slot]").forEach((node) => {
+    const key = node.dataset.mediaSlot;
+    const value = media[key];
+    if (!value) return;
+    if (node.tagName === "IMG") node.src = value;
+    else node.style.backgroundImage = `url("${value}")`;
+  });
 }
 
 function updateSocialLinks(links) {
