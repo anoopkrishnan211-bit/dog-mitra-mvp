@@ -5,6 +5,7 @@ const StaffSchema = buildBaseSchema({
   name: { type: String, required: true, trim: true, minlength: 2, maxlength: 120 },
   email: { type: String, required: true, trim: true, lowercase: true, unique: true, index: true },
   phone: { type: String, required: true, trim: true, unique: true, index: true },
+  passwordHash: { type: String, trim: true, select: false },
   role: {
     type: String,
     required: true,
