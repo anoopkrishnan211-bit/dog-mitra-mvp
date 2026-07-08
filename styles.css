@@ -91,6 +91,17 @@ h2 { margin: 0; font-size: clamp(28px, 3vw, 44px); line-height: 1.08; letter-spa
 h3 { margin: 16px 0 8px; font-size: 20px; }
 p { color: var(--muted); line-height: 1.65; }
 .hero-copy { font-size: 18px; max-width: 680px; margin: 24px 0; }
+.emergency-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(31, 107, 79, 0.08);
+  color: var(--forest-deep);
+  font-weight: 800;
+}
 .hero-photo { margin: 0; position: relative; }
 .hero-photo img, .gallery img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
 .hero-photo figcaption { margin-top: 12px; color: var(--muted); font-weight: 700; }
@@ -164,6 +175,12 @@ summary { cursor: pointer; font-weight: 800; }
 .admin-form label span { display: block; margin-bottom: 8px; font-weight: 800; }
 .admin-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
 .admin-tools span { padding: 12px; border-radius: 8px; background: var(--sky); color: var(--forest); font-weight: 800; text-align: center; }
+.settings-form { margin-top: 22px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow); }
+.settings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.settings-grid label span { display: block; margin-bottom: 8px; font-weight: 800; }
+.settings-grid textarea { min-height: 96px; }
+.settings-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.settings-grid .wide { grid-column: 1 / -1; }
 .news-section .content-grid,
 .events-section .event-list,
 .policy-grid,
@@ -187,6 +204,7 @@ summary { cursor: pointer; font-weight: 800; }
   h1 { font-size: 38px; }
   .hero { padding: 28px 18px; }
   .trust-strip, .product-grid, .booking-form, .trust-grid, .service-grid, .policy-grid, .dashboard { grid-template-columns: 1fr; }
+  .settings-grid { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
   .gallery img:first-child { grid-row: auto; }
   .wide { grid-column: auto; }

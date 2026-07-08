@@ -165,19 +165,35 @@ const cartCount = document.querySelector("#cartCount");
 const cartDrawer = document.querySelector("#cartDrawer");
 const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
+const adminStatus = document.querySelector("#adminStatus");
+const settingsForm = document.querySelector("#settingsForm");
+const settingsStatus = document.querySelector("#settingsStatus");
+const upiNumber = document.querySelector("#upiNumber");
+const upiHintText = document.querySelector("#upiHintText");
 const settingsCache = {
   contact: null,
   site: null
 };
+const apiBase = window.location.origin && window.location.origin !== "null" ? "/api" : "http://localhost:4000/api";
+
+function getToken() {
+  return localStorage.getItem("dogmitra.accessToken") || "";
+}
+
+function setAuthTokens(tokens) {
+  if (tokens.accessToken) localStorage.setItem("dogmitra.accessToken", tokens.accessToken);
+  if (tokens.refreshToken) localStorage.setItem("dogmitra.refreshToken", tokens.refreshToken);
+}
 
 async function loadSettings() {
   try {
-    const response = await fetch("/api/settings");
+    const response = await fetch(`${apiBase}/settings`);
     if (!response.ok) return;
     const data = await response.json();
     settingsCache.contact = data.contact || null;
     settingsCache.site = data.site || null;
     applySettings();
+    fillSettingsForm();
   } catch (error) {
     console.warn("Settings load failed", error);
   }
@@ -210,6 +226,17 @@ function applySettings() {
   if (heroTitle && site.homepageHeroTitle) heroTitle.textContent = site.homepageHeroTitle;
   const heroCopy = document.querySelector('[data-i18n="heroCopy"]');
   if (heroCopy && site.homepageHeroSubtitle) heroCopy.textContent = site.homepageHeroSubtitle;
+  if (site.seo?.title) {
+    document.title = site.seo.title;
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.content = site.seo.title;
+  }
+  if (site.seo?.description) {
+    const description = document.querySelector('meta[name="description"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (description) description.content = site.seo.description;
+    if (ogDescription) ogDescription.content = site.seo.description;
+  }
 
   const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
   phoneLinks.forEach((link) => {
@@ -221,7 +248,10 @@ function applySettings() {
   });
 
   const footerCallLink = document.querySelector("#footerCallLink");
-  if (footerCallLink && displayPhone) footerCallLink.href = `tel:${normalizePhone(displayPhone)}`;
+  if (footerCallLink && displayPhone) {
+    footerCallLink.href = `tel:${normalizePhone(displayPhone)}`;
+    footerCallLink.textContent = displayPhone;
+  }
 
   const footerAddress = document.querySelector("#footerAddress");
   if (footerAddress && contact.address) {
@@ -244,6 +274,16 @@ function applySettings() {
     emergencyCopy.textContent = `${emergencyHours}. Quick call support to decide whether a clinic visit is needed immediately.`;
   }
 
+  const heroEmergency = document.querySelector("#heroEmergency");
+  if (heroEmergency && emergencyHours) {
+    heroEmergency.textContent = `${site.businessHours?.emergencyLabel || "Emergency Veterinary Assistance"}: ${emergencyHours}`;
+  }
+
+  const appointmentEmergency = document.querySelector("#appointmentEmergency");
+  if (appointmentEmergency && emergencyHours) {
+    appointmentEmergency.textContent = `${site.businessHours?.emergencyLabel || "Emergency Veterinary Assistance"}: ${emergencyHours}`;
+  }
+
   const faqUpi = document.querySelector('[data-i18n="faq2Ans"]');
   if (faqUpi && displayPhone) {
     faqUpi.textContent = `Yes. Use ${normalizePhone(displayPhone)} for UPI payment and share the payment confirmation with the clinic.`;
@@ -254,16 +294,15 @@ function applySettings() {
 
   const upiHint = document.querySelector('[data-i18n="upiHint"]');
   if (upiHint && displayPhone) upiHint.textContent = `Use ${normalizePhone(displayPhone)} for UPI payments.`;
+  if (upiNumber && displayPhone) upiNumber.textContent = normalizePhone(displayPhone);
+  if (upiHintText && displayPhone) upiHintText.textContent = `Use ${displayPhone} for UPI payments.`;
 
   const doctorHours = document.querySelector('[data-i18n="timingsValue"]');
   if (doctorHours && hoursOpen && hoursClose) {
     doctorHours.textContent = `${hoursLabel || "Monday - Saturday"} ${hoursOpen} - ${hoursClose}`;
   }
 
-  const contactEmailNodes = document.querySelectorAll(".footer p, .admin-form, .section-heading");
-  if (email) {
-    document.documentElement.setAttribute("data-clinic-email", email);
-  }
+  if (email) document.documentElement.setAttribute("data-clinic-email", email);
 
   const emergencyContactLinks = document.querySelectorAll('[href^="tel:"]');
   emergencyContactLinks.forEach((link) => {
@@ -298,6 +337,136 @@ function updateSocialLinks(links) {
   if (!socialList.length) return;
 }
 
+function fillSettingsForm() {
+  if (!settingsForm) return;
+  const contact = settingsCache.contact || {};
+  const site = settingsCache.site || {};
+  const setValue = (name, value) => {
+    const field = settingsForm.elements.namedItem(name);
+    if (field && value !== undefined && value !== null) field.value = value;
+  };
+  setValue("site.siteName", site.siteName);
+  setValue("contact.phone", contact.phone);
+  setValue("contact.whatsapp", contact.whatsapp);
+  setValue("contact.email", contact.email);
+  setValue("contact.emergencyHours", contact.emergencyHours);
+  setValue("contact.emergencyPhone", contact.emergencyPhone);
+  setValue("contact.address.line1", contact.address?.line1);
+  setValue("contact.address.line2", contact.address?.line2);
+  setValue("contact.address.city", contact.address?.city);
+  setValue("contact.address.state", contact.address?.state);
+  setValue("contact.address.pincode", contact.address?.pincode);
+  setValue("contact.googleMapsLink", contact.googleMapsLink);
+  setValue("contact.latitude", contact.latitude);
+  setValue("contact.longitude", contact.longitude);
+  setValue("site.businessHours.display", site.businessHours?.display);
+  setValue("site.businessHours.open", site.businessHours?.open);
+  setValue("site.businessHours.close", site.businessHours?.close);
+  setValue("site.payment.upiId", site.payment?.upiId);
+  setValue("site.payment.method", site.payment?.method);
+  setValue("site.smtp.host", site.smtp?.host);
+  setValue("site.smtp.port", site.smtp?.port);
+  setValue("site.smtp.username", site.smtp?.username);
+  setValue("site.smtp.password", "");
+  setValue("site.smtp.senderName", site.smtp?.senderName);
+  setValue("site.smtp.senderEmail", site.smtp?.senderEmail);
+  setValue("site.analytics.ga4", site.analytics?.ga4);
+  setValue("site.analytics.gtm", site.analytics?.gtm);
+  setValue("site.analytics.metaPixel", site.analytics?.metaPixel);
+  setValue("site.analytics.clarity", site.analytics?.clarity);
+  setValue("site.socialLinks.instagram", site.socialLinks?.instagram);
+  setValue("site.socialLinks.facebook", site.socialLinks?.facebook);
+  setValue("site.socialLinks.youtube", site.socialLinks?.youtube);
+  setValue("site.socialLinks.linkedin", site.socialLinks?.linkedin);
+  setValue("site.socialLinks.googleBusiness", site.socialLinks?.googleBusiness);
+  setValue("site.branding.logoUrl", site.branding?.logoUrl);
+  setValue("site.branding.faviconUrl", site.branding?.faviconUrl);
+  setValue("site.seo.title", site.seo?.title);
+  setValue("site.seo.description", site.seo?.description);
+}
+
+function serializeSettingsForm() {
+  if (!settingsForm) return {};
+  const get = (name) => settingsForm.elements.namedItem(name)?.value?.trim();
+  return {
+    contact: {
+      phone: get("contact.phone"),
+      whatsapp: get("contact.whatsapp"),
+      email: get("contact.email"),
+      emergencyHours: get("contact.emergencyHours"),
+      emergencyPhone: get("contact.emergencyPhone"),
+      address: {
+        line1: get("contact.address.line1"),
+        line2: get("contact.address.line2"),
+        city: get("contact.address.city"),
+        state: get("contact.address.state"),
+        pincode: get("contact.address.pincode"),
+      },
+      googleMapsLink: get("contact.googleMapsLink"),
+      latitude: Number(get("contact.latitude") || 0),
+      longitude: Number(get("contact.longitude") || 0),
+    },
+    site: {
+      siteName: get("site.siteName"),
+      businessHours: {
+        display: get("site.businessHours.display"),
+        open: get("site.businessHours.open"),
+        close: get("site.businessHours.close"),
+      },
+      payment: {
+        upiId: get("site.payment.upiId"),
+        method: get("site.payment.method"),
+      },
+      smtp: {
+        host: get("site.smtp.host"),
+        port: Number(get("site.smtp.port") || 587),
+        username: get("site.smtp.username"),
+        password: get("site.smtp.password"),
+        senderName: get("site.smtp.senderName"),
+        senderEmail: get("site.smtp.senderEmail"),
+      },
+      analytics: {
+        ga4: get("site.analytics.ga4"),
+        gtm: get("site.analytics.gtm"),
+        metaPixel: get("site.analytics.metaPixel"),
+        clarity: get("site.analytics.clarity"),
+      },
+      socialLinks: {
+        instagram: get("site.socialLinks.instagram"),
+        facebook: get("site.socialLinks.facebook"),
+        youtube: get("site.socialLinks.youtube"),
+        linkedin: get("site.socialLinks.linkedin"),
+        googleBusiness: get("site.socialLinks.googleBusiness"),
+      },
+      branding: {
+        logoUrl: get("site.branding.logoUrl"),
+        faviconUrl: get("site.branding.faviconUrl"),
+      },
+      seo: {
+        title: get("site.seo.title"),
+        description: get("site.seo.description"),
+      },
+    },
+  };
+}
+
+async function saveSettings() {
+  const response = await fetch(`${apiBase}/settings`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(serializeSettingsForm()),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.message || "Unable to save settings");
+  settingsCache.contact = data.contact || null;
+  settingsCache.site = data.site || null;
+  applySettings();
+  fillSettingsForm();
+}
+
 function updateSchemaData({ contact, site }) {
   const script = document.querySelector('script[type="application/ld+json"]');
   if (!script) return;
@@ -306,7 +475,6 @@ function updateSchemaData({ contact, site }) {
     const address = contact.address || {};
     data.name = site.siteName || data.name;
     data.telephone = normalizePhone(contact.phone || site.contact?.phone || "");
-    data.email = contact.email || site.contact?.email || "";
     data.address.streetAddress = [address.line1, address.line2].filter(Boolean).join(", ") || data.address.streetAddress;
     data.address.addressLocality = address.city || data.address.addressLocality;
     data.address.addressRegion = address.state || data.address.addressRegion;
@@ -435,7 +603,39 @@ if (closeAdmin && adminModal) {
 if (adminLoginForm) {
   adminLoginForm.addEventListener("submit", function(event) {
     event.preventDefault();
-    document.querySelector("#adminStatus").textContent = t("adminWelcome", "Admin access request received. Secure access will be verified by the clinic administrator.");
+    const formData = new FormData(adminLoginForm);
+    fetch(`${apiBase}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        identifier: formData.get("admin"),
+        password: formData.get("password"),
+      }),
+    })
+      .then(async (response) => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || "Login failed");
+        setAuthTokens(data);
+        if (adminStatus) adminStatus.textContent = "Login successful. Settings editor unlocked.";
+        if (settingsForm) settingsForm.hidden = false;
+        loadSettings();
+      })
+      .catch((error) => {
+        if (adminStatus) adminStatus.textContent = error.message;
+      });
+  });
+}
+
+if (settingsForm) {
+  settingsForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    if (settingsStatus) settingsStatus.textContent = "Saving...";
+    try {
+      await saveSettings();
+      if (settingsStatus) settingsStatus.textContent = "Settings saved.";
+    } catch (error) {
+      if (settingsStatus) settingsStatus.textContent = error.message;
+    }
   });
 }
 
