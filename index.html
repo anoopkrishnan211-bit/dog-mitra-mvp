@@ -3,14 +3,42 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dog Mitra veterinary clinic, Dewas. Book appointments, home visits, shop pet care essentials, and manage pet health records.">
-    <title>Dog Mitra | Veterinary Clinic & Pet Care Store</title>
+    <title>Dog Mitra | Veterinary Clinic, Home Visits & Pet Care Store in Dewas</title>
+    <meta name="description" content="Dog Mitra in Dewas offers veterinary consultations, home visits, vaccination care, pet wellness services, genuine pet medicines, and pet care products with UPI payment support.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://dogmitra.example.com/">
+    <meta property="og:title" content="Dog Mitra | Trusted Veterinary Care in Dewas">
+    <meta property="og:description" content="Book veterinary consultations, request home visits, and shop trusted pet care essentials from Dog Mitra, Dewas.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VeterinaryCare",
+        "name": "Dog Mitra",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Shop number 14, Amer Mohini Garden, Ujjain Rd, near Abhinav Hotel, Shivaji Nagar, Moti Bunglow",
+          "addressLocality": "Dewas",
+          "addressRegion": "Madhya Pradesh",
+          "postalCode": "455001",
+          "addressCountry": "IN"
+        },
+        "telephone": "+919754240177",
+        "founder": "Dr. Sanjeev Kumre",
+        "areaServed": "Dewas",
+        "paymentAccepted": "UPI, Cash",
+        "hasMap": "https://maps.app.goo.gl/JwNZ55GysRrY5hSs5"
+      }
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="brand" href="#home" aria-label="Dog Mitra home">
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path class="paw-pad" d="M19 38c0-8 6-13 13-13s13 5 13 13c0 9-7 14-13 14s-13-5-13-14Z"/><circle class="paw-toe" cx="18" cy="24" r="6"/><circle class="paw-toe" cx="30" cy="17" r="6"/><circle class="paw-toe" cx="43" cy="24" r="6"/><path class="scope" d="M40 42c8 0 13-5 13-13v-5M53 24a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM31 43c-9 0-16-7-16-16V15"/></svg></span>
@@ -18,10 +46,11 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#doctor" data-i18n="navDoctor">Doctor</a>
         <a href="#shop" data-i18n="navShop">Shop</a>
         <a href="#appointments" data-i18n="navBooking">Booking</a>
-        <a href="#admin" data-i18n="navAdmin">Admin</a><button class="admin-link" id="adminLoginButton" type="button" data-i18n="adminLogin">Admin Login</button>
         <a href="#contact" data-i18n="navContact">Contact</a>
+        <button class="admin-link" id="adminLoginButton" type="button" data-i18n="staffLogin">Staff Login</button>
       </nav>
       <div class="header-actions">
         <button class="ghost-btn" id="languageToggle" type="button" aria-label="Switch language">हिंदी</button>
@@ -29,45 +58,76 @@
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <section class="hero" id="home">
-        <div class="hero-media" role="img" aria-label="Veterinary clinic visual"></div>
         <div class="hero-content">
-          <p class="eyebrow" data-i18n="heroEyebrow">Dog Mitra, Dewas</p>
-          <h1 data-i18n="heroTitle">Premium veterinary care, home visits, and pet essentials in one place.</h1>
-          <p class="hero-copy" data-i18n="heroCopy">Book appointments with Dr. Sanjeev Kumre, request home care, shop trusted products, and keep every pet record organized.</p>
+          <p class="eyebrow" data-i18n="heroEyebrow">Trusted veterinary care in Dewas</p>
+          <h1 data-i18n="heroTitle">Compassionate care for dogs, from clinic visits to doorstep support.</h1>
+          <p class="hero-copy" data-i18n="heroCopy">Consult Dr. Sanjeev Kumre, book home visits, manage vaccination care, and shop genuine pet health essentials from Dog Mitra.</p>
           <div class="hero-actions">
             <a class="primary-btn" href="#appointments" data-i18n="bookNow">Book appointment</a>
             <a class="secondary-btn" href="https://wa.me/919754240177" data-i18n="whatsapp">WhatsApp clinic</a>
           </div>
-          <div class="quick-stats" aria-label="Clinic highlights">
-            <span><strong>99.5%</strong><small data-i18n="uptime">uptime target</small></span>
-            <span><strong>&lt;3s</strong><small data-i18n="load">page load goal</small></span>
-            <span><strong>8-12</strong><small data-i18n="review">week review</small></span>
+          <div class="trust-strip" aria-label="Clinic trust highlights">
+            <span><strong>4.8/5</strong><small data-i18n="rating">Google rating focus</small></span>
+            <span><strong>Home</strong><small data-i18n="homeVisitBadge">visit available</small></span>
+            <span><strong>Genuine</strong><small data-i18n="medicines">medicines</small></span>
+            <span><strong>Emergency</strong><small data-i18n="emergency">consult guidance</small></span>
+          </div>
+        </div>
+        <figure class="hero-photo">
+          <img src="assets/indian-pariah.svg" alt="Healthy Indian dog receiving veterinary care" loading="eager">
+          <figcaption data-i18n="heroCaption">Clinic consultations, vaccination care, wellness support, and home visits for Dewas families.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section trust-section" id="about">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="trustEyebrow">Why pet parents trust Dog Mitra</p>
+          <h2 data-i18n="trustTitle">Professional veterinary attention with clear communication and practical follow-up.</h2>
+        </div>
+        <div class="trust-grid">
+          <article><strong>Certified</strong><span data-i18n="certified">Veterinary doctor</span></article>
+          <article><strong>Home Visit</strong><span data-i18n="homeCare">Care at your doorstep</span></article>
+          <article><strong>Pet Records</strong><span data-i18n="records">Vaccination and care history</span></article>
+          <article><strong>Dewas</strong><span data-i18n="localTrust">Trusted local clinic</span></article>
+        </div>
+      </section>
+
+      <section class="section doctor-section" id="doctor">
+        <div class="doctor-card">
+          <div class="doctor-photo" role="img" aria-label="Doctor profile area"></div>
+          <div>
+            <p class="eyebrow" data-i18n="doctorEyebrow">Doctor profile</p>
+            <h2>Dr. Sanjeev Kumre</h2>
+            <p data-i18n="doctorBio">Dr. Sanjeev Kumre leads Dog Mitra with a focus on dog wellness, preventive care, vaccination guidance, everyday illness support, and clear advice for pet parents.</p>
+            <dl class="profile-list">
+              <div><dt data-i18n="specialization">Specialization</dt><dd data-i18n="specializationValue">Dog consultation, vaccination, wellness and home care</dd></div>
+              <div><dt data-i18n="languages">Languages</dt><dd data-i18n="languagesValue">English, Hindi</dd></div>
+              <div><dt data-i18n="timings">Consultation</dt><dd data-i18n="timingsValue">Call or WhatsApp for today's availability</dd></div>
+            </dl>
           </div>
         </div>
       </section>
 
-      <section class="section about-band" id="about">
-        <div><p class="eyebrow" data-i18n="aboutEyebrow">About the clinic</p><h2 data-i18n="aboutTitle">A digital-first pet care experience for Dewas families.</h2></div>
-        <p data-i18n="aboutCopy">Dog Mitra brings clinic appointments, home visits, hyper care services, online shopping, pet health records, and follow-ups into one responsive bilingual platform.</p>
-      </section>
-
       <section class="section" id="services">
-        <div class="section-heading"><p class="eyebrow" data-i18n="servicesEyebrow">Care services</p><h2 data-i18n="servicesTitle">Designed around the daily needs of pets and clinic staff.</h2></div>
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="servicesEyebrow">Care services</p>
+          <h2 data-i18n="servicesTitle">Structured care for routine, preventive, urgent, and home-based needs.</h2>
+        </div>
         <div class="service-grid">
-          <article><span class="service-icon">+</span><h3 data-i18n="serviceClinic">Clinic appointments</h3><p data-i18n="serviceClinicCopy">Slot booking, status tracking, appointment history, and staff-side management.</p></article>
-          <article><span class="service-icon">H</span><h3 data-i18n="serviceHome">Home visit booking</h3><p data-i18n="serviceHomeCopy">Request doorstep care with address, pet details, preferred date, and care notes.</p></article>
-          <article><span class="service-icon">P</span><h3 data-i18n="serviceHyper">Hyper care services</h3><p data-i18n="serviceHyperCopy">Priority care workflows for vaccination, recovery, grooming, and wellness follow-ups.</p></article>
-          <article><span class="service-icon">R</span><h3 data-i18n="serviceRecords">Pet health records</h3><p data-i18n="serviceRecordsCopy">Medical notes, vaccination records, communication history, and purchase insights.</p></article>
+          <article><span class="service-icon">+</span><h3 data-i18n="serviceClinic">Clinic consultation</h3><p data-i18n="serviceClinicCopy">General checkups, illness review, treatment guidance, and follow-up planning.</p><a href="#appointments" data-i18n="bookService">Book now</a></article>
+          <article><span class="service-icon">H</span><h3 data-i18n="serviceHome">Home visit</h3><p data-i18n="serviceHomeCopy">Doorstep care for pets that need familiar surroundings or easier handling.</p><a href="#appointments" data-i18n="bookService2">Book now</a></article>
+          <article><span class="service-icon">V</span><h3 data-i18n="serviceVaccine">Vaccination care</h3><p data-i18n="serviceVaccineCopy">Vaccination planning, due-date reminders, and record support for dogs.</p><a href="#appointments" data-i18n="bookService3">Book now</a></article>
+          <article><span class="service-icon">E</span><h3 data-i18n="serviceEmergency">Emergency guidance</h3><p data-i18n="serviceEmergencyCopy">Quick call support to decide whether a clinic visit is needed immediately.</p><a href="tel:+919754240177" data-i18n="callNow">Call now</a></article>
         </div>
       </section>
 
       <section class="section split" id="shop">
         <div>
-          <p class="eyebrow" data-i18n="shopEyebrow">Pet shop</p>
-          <h2 data-i18n="shopTitle">Catalogue, filters, cart, checkout, and order tracking.</h2>
-          <p data-i18n="shopCopy">The MVP includes product management, inventory visibility, secure payments, customer accounts, reviews, and local order updates.</p>
+          <p class="eyebrow" data-i18n="shopEyebrow">Pet care store</p>
+          <h2 data-i18n="shopTitle">Genuine food, care products, accessories, and wellness essentials.</h2>
+          <p data-i18n="shopCopy">Browse trusted products, filter by category, add items to cart, and pay using UPI on the clinic number.</p>
           <div class="shop-controls" aria-label="Product filters">
             <button class="filter-chip active" type="button" data-filter="all" data-i18n="all">All</button>
             <button class="filter-chip" type="button" data-filter="food" data-i18n="food">Food</button>
@@ -77,7 +137,7 @@
         </div>
         <div class="product-panel" aria-live="polite">
           <div class="search-row">
-            <input id="productSearch" type="search" placeholder="Search pet products" data-i18n-placeholder="searchProducts">
+            <input id="productSearch" type="search" placeholder="Search pet products" data-i18n-placeholder="searchProducts" aria-label="Search pet products">
             <button class="icon-btn" id="cartButton" type="button" aria-label="View cart">Cart <span id="cartCount">0</span></button>
           </div>
           <div class="product-grid" id="productGrid"></div>
@@ -85,63 +145,73 @@
       </section>
 
       <section class="section appointments" id="appointments">
-        <div class="section-heading"><p class="eyebrow" data-i18n="bookingEyebrow">Appointment system</p><h2 data-i18n="bookingTitle">Book clinic visits and home visits in under a minute.</h2></div>
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="bookingEyebrow">Appointment booking</p>
+          <h2 data-i18n="bookingTitle">Share the care need and the clinic team will confirm the next available slot.</h2>
+        </div>
         <form class="booking-form" id="bookingForm">
           <label><span data-i18n="petParent">Pet parent</span><input name="parent" required placeholder="Full name" data-i18n-placeholder="fullName"></label>
           <label><span data-i18n="petName">Pet name</span><input name="pet" required placeholder="Pet name" data-i18n-placeholder="petNamePh"></label>
-          <label><span data-i18n="bookingType">Booking type</span><select name="type"><option data-i18n="clinicVisit">Clinic visit</option><option data-i18n="homeVisit">Home visit</option><option data-i18n="hyperCare">Hyper care</option></select></label>
+          <label><span data-i18n="bookingType">Booking type</span><select name="type"><option data-i18n="clinicVisit">Clinic visit</option><option data-i18n="homeVisit">Home visit</option><option data-i18n="vaccination">Vaccination</option><option data-i18n="emergencyConsult">Emergency consultation</option></select></label>
           <label><span data-i18n="date">Preferred date</span><input name="date" required type="date"></label>
           <label><span data-i18n="phone">Phone</span><input name="phone" required type="tel" placeholder="+91"></label>
-          <label class="wide"><span data-i18n="notes">Care notes</span><textarea name="notes" rows="4" placeholder="Symptoms, vaccination due date, or visit reason" data-i18n-placeholder="notesPh"></textarea></label>
-          <button class="primary-btn wide" type="submit" data-i18n="confirmBooking">Confirm booking</button>
+          <label class="wide"><span data-i18n="notes">Care notes</span><textarea name="notes" rows="4" placeholder="Symptoms, vaccination due date, address, or visit reason" data-i18n-placeholder="notesPh"></textarea></label>
+          <button class="primary-btn wide" type="submit" data-i18n="confirmBooking">Request confirmation</button>
           <p class="form-status wide" id="bookingStatus" role="status"></p>
         </form>
       </section>
 
       <section class="section admin-band" id="admin">
-        <div><p class="eyebrow" data-i18n="adminEyebrow">Admin portal + CRM</p><h2 data-i18n="adminTitle">A practical control center for products, appointments, customers, pets, and content.</h2></div>
-        <div class="dashboard">
-          <div class="metric"><span data-i18n="orders">Orders</span><strong>128</strong><small>+18%</small></div>
-          <div class="metric"><span data-i18n="appointments">Appointments</span><strong>42</strong><small>this week</small></div>
-          <div class="metric"><span data-i18n="inventory">Inventory alerts</span><strong>7</strong><small>low stock</small></div>
-          <div class="metric"><span data-i18n="followups">Follow-ups</span><strong>19</strong><small>due soon</small></div>
+        <div>
+          <p class="eyebrow" data-i18n="adminEyebrow">Clinic operations</p>
+          <h2 data-i18n="adminTitle">Staff tools for appointments, orders, products, pet records, and customer follow-ups.</h2>
         </div>
-        <div class="feature-list"><span data-i18n="cms">CMS</span><span data-i18n="rbac">Role-based access</span><span data-i18n="analytics">Analytics dashboard</span><span data-i18n="activityLogs">Activity logs</span><span data-i18n="backups">Backups</span><span data-i18n="vaccination">Vaccination records</span></div>
+        <div class="dashboard">
+          <div class="metric"><span data-i18n="orders">Orders</span><strong>128</strong><small data-i18n="monthly">monthly</small></div>
+          <div class="metric"><span data-i18n="appointments">Appointments</span><strong>42</strong><small data-i18n="weekly">this week</small></div>
+          <div class="metric"><span data-i18n="inventory">Inventory alerts</span><strong>7</strong><small data-i18n="lowStock">low stock</small></div>
+          <div class="metric"><span data-i18n="followups">Follow-ups</span><strong>19</strong><small data-i18n="dueSoon">due soon</small></div>
+        </div>
       </section>
 
       <section class="section gallery-testimonials" id="gallery">
-        <div class="gallery"><div class="gallery-tile large"></div><div class="gallery-tile"></div><div class="gallery-tile accent"></div></div>
+        <div class="gallery"><img src="assets/rajapalayam.svg" alt="Rajapalayam dog care visual" loading="lazy"><img src="assets/mudhol-hound.svg" alt="Mudhol Hound dog care visual" loading="lazy"><img src="assets/kombai.svg" alt="Kombai dog care visual" loading="lazy"></div>
         <div>
-          <p class="eyebrow" data-i18n="trustEyebrow">Gallery + testimonials</p>
-          <h2 data-i18n="trustTitle">Warm, trustworthy proof for new pet parents.</h2>
-          <blockquote data-i18n="testimonial">"The clinic team made our dog comfortable and the follow-up reminders helped us stay on track."</blockquote>
+          <p class="eyebrow" data-i18n="reviewEyebrow">Reviews and care stories</p>
+          <h2 data-i18n="reviewTitle">Clear advice, careful handling, and reliable follow-up for pet parents.</h2>
+          <blockquote data-i18n="testimonial">"The clinic team made our dog comfortable and helped us understand the next care steps clearly."</blockquote>
           <div class="faq-list" id="faq">
             <details open><summary data-i18n="faq1">Can I book a home visit online?</summary><p data-i18n="faq1Ans">Yes. Choose Home visit in the booking form and add your address in the notes.</p></details>
-            <details><summary data-i18n="faq2">Will the website support Hindi?</summary><p data-i18n="faq2Ans">Yes. The MVP includes English and Hindi content switching.</p></details>
+            <details><summary data-i18n="faq2">Can I pay by UPI?</summary><p data-i18n="faq2Ans">Yes. Use 9754240177 for UPI payment and share the payment confirmation with the clinic.</p></details>
+            <details><summary data-i18n="faq3">Do you maintain vaccination records?</summary><p data-i18n="faq3Ans">The clinic can help track vaccination history and follow-up dates for returning customers.</p></details>
           </div>
         </div>
       </section>
 
-      <section class="section roadmap" id="blog">
-        <div class="section-heading"><p class="eyebrow" data-i18n="roadmapEyebrow">Product roadmap</p><h2 data-i18n="roadmapTitle">Launch the MVP, measure real usage, then expand carefully.</h2></div>
-        <div class="phase-grid">
-          <article><strong>Phase 1</strong><p data-i18n="phase1">Website, commerce, appointments, admin, CRM, SEO, security.</p></article>
-          <article><strong>Phase 2</strong><p data-i18n="phase2">Mobile apps, video consults, reminders, loyalty, subscriptions.</p></article>
-          <article><strong>Phase 3</strong><p data-i18n="phase3">AI pet care assistant, e-prescriptions, advanced CRM workflows.</p></article>
-          <article><strong>Phase 4</strong><p data-i18n="phase4">Multi-branch, franchise, delivery, BI, forecasting, marketplace.</p></article>
+      <section class="section legal-section" id="policies">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="policiesEyebrow">Customer policies</p>
+          <h2 data-i18n="policiesTitle">Transparent policies for appointments, orders, prescriptions, privacy, and refunds.</h2>
+        </div>
+        <div class="policy-grid">
+          <article><h3 data-i18n="privacy">Privacy Policy</h3><p data-i18n="privacyCopy">Customer and pet details are used only for clinic communication, appointment support, order handling, and care records.</p></article>
+          <article><h3 data-i18n="refund">Refund Policy</h3><p data-i18n="refundCopy">Refunds or replacements depend on product condition, order status, and clinic verification.</p></article>
+          <article><h3 data-i18n="shipping">Shipping Policy</h3><p data-i18n="shippingCopy">Local fulfilment depends on product availability and delivery feasibility in Dewas.</p></article>
+          <article><h3 data-i18n="prescription">Prescription Policy</h3><p data-i18n="prescriptionCopy">Prescription medicines should be used only under veterinary guidance.</p></article>
         </div>
       </section>
     </main>
 
     <footer class="footer" id="contact">
-      <div><h2>Dog Mitra</h2><p>Shop number 14, Amer Mohini Garden, Ujjain Rd, near Abhinav Hotel, Shivaji Nagar, Moti Bunglow, Dewas, Madhya Pradesh 455001</p><p><strong data-i18n="doctor">Doctor:</strong> Dr. Sanjeev Kumre</p></div>
+      <div><h2>Dog Mitra</h2><p>Shop number 14, Amer Mohini Garden, Ujjain Rd, near Abhinav Hotel, Shivaji Nagar, Moti Bunglow, Dewas, Madhya Pradesh 455001</p><p><strong data-i18n="doctorLabel">Doctor:</strong> Dr. Sanjeev Kumre</p><p><strong data-i18n="hours">Clinic hours:</strong> Call for today's availability and home visit slots.</p></div>
       <div class="footer-actions"><a class="primary-btn" href="tel:+919754240177">+91 97542 40177</a><a class="secondary-btn" href="https://maps.app.goo.gl/JwNZ55GysRrY5hSs5" target="_blank" rel="noreferrer" data-i18n="openMaps">Open Google Maps</a></div>
     </footer>
 
     <div class="cart-drawer" id="cartDrawer" aria-hidden="true">
-      <div class="cart-content"><button class="close-btn" id="closeCart" type="button" aria-label="Close cart">x</button><h2 data-i18n="cart">Cart</h2><div id="cartItems"></div><div class="cart-total"><span data-i18n="total">Total</span><strong id="cartTotal">Rs. 0</strong></div><div class="upi-box"><span data-i18n="upiPay">UPI payment number</span><strong>9754240177</strong><small data-i18n="upiHint">Use this number for UPI payments for now.</small></div><button class="primary-btn" id="upiCheckout" type="button" data-i18n="secureCheckout">Pay via UPI</button></div>
+      <div class="cart-content"><button class="close-btn" id="closeCart" type="button" aria-label="Close cart">x</button><h2 data-i18n="cart">Cart</h2><div id="cartItems"></div><div class="cart-total"><span data-i18n="total">Total</span><strong id="cartTotal">Rs. 0</strong></div><div class="upi-box"><span data-i18n="upiPay">UPI payment number</span><strong>9754240177</strong><small data-i18n="upiHint">Use this number for UPI payments.</small></div><button class="primary-btn" id="upiCheckout" type="button" data-i18n="secureCheckout">Pay via UPI</button></div>
     </div>
 
+    <div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle"><button class="close-btn" id="closeAdmin" type="button" aria-label="Close staff login">x</button><p class="eyebrow" data-i18n="adminSecure">Website management</p><h2 id="adminModalTitle" data-i18n="adminPortalLogin">Staff login</h2><form class="admin-form" id="adminLoginForm"><label><span data-i18n="adminEmail">Email or phone</span><input name="admin" required placeholder="admin@dogmitra.in"></label><label><span data-i18n="adminPassword">Password</span><input name="password" required type="password" placeholder="Enter password"></label><button class="primary-btn" type="submit" data-i18n="loginManage">Login to manage site</button><p class="form-status" id="adminStatus" role="status"></p></form><div class="admin-tools"><span data-i18n="manageProducts">Products</span><span data-i18n="manageAppointments">Appointments</span><span data-i18n="manageOrders">Orders</span><span data-i18n="manageContent">Content</span></div></div></div>
     <script src="script.js"></script>
-  <div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle"><button class="close-btn" id="closeAdmin" type="button" aria-label="Close admin login">x</button><p class="eyebrow" data-i18n="adminSecure">Website management</p><h2 id="adminModalTitle" data-i18n="adminPortalLogin">Admin login</h2><form class="admin-form" id="adminLoginForm"><label><span data-i18n="adminEmail">Email or phone</span><input name="admin" required placeholder="admin@dogmitra.in"></label><label><span data-i18n="adminPassword">Password</span><input name="password" required type="password" placeholder="Enter password"></label><button class="primary-btn" type="submit" data-i18n="loginManage">Login to manage site</button><p class="form-status" id="adminStatus" role="status"></p></form><div class="admin-tools"><span data-i18n="manageProducts">Products</span><span data-i18n="manageAppointments">Appointments</span><span data-i18n="manageOrders">Orders</span><span data-i18n="manageContent">Content</span></div></div></div></body>
+  </body>
 </html>
