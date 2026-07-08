@@ -16,24 +16,24 @@ const translations = {
     navEvents: "\u0907\u0935\u0947\u0902\u091f\u094d\u0938",
     navContact: "\u0938\u0902\u092a\u0930\u094d\u0915",
     staffLogin: "\u090f\u0921\u092e\u093f\u0928 \u0932\u0949\u0917\u093f\u0928",
-    heroEyebrow: "\u0926\u0947\u0935\u093e\u0938 \u092e\u0947\u0902 \u092d\u0930\u094b\u0938\u0947\u092e\u0902\u0926 \u092a\u0936\u0941 \u091a\u093f\u0915\u093f\u0924\u094d\u0938\u093e",
-    heroTitle: "\u0915\u094d\u0932\u093f\u0928\u093f\u0915 \u0935\u093f\u091c\u093f\u091f \u0938\u0947 \u0932\u0947\u0915\u0930 \u0918\u0930 \u092a\u0930 \u0926\u0947\u0916\u092d\u093e\u0932 \u0924\u0915, dogs \u0915\u0947 \u0932\u093f\u090f \u0938\u0902\u0935\u0947\u0926\u0928\u0936\u0940\u0932 care\u0964",
-    heroCopy: "Dr. Sanjeev Kumre \u0938\u0947 \u0938\u0932\u093e\u0939 \u0932\u0947\u0902, home visit book \u0915\u0930\u0947\u0902, vaccination care manage \u0915\u0930\u0947\u0902 \u0914\u0930 Dog Mitra \u0938\u0947 genuine pet essentials \u0916\u0930\u0940\u0926\u0947\u0902\u0964",
+    heroEyebrow: "\u092a\u0936\u0941 \u091a\u093f\u0915\u093f\u0924\u094d\u0938\u093e \u0914\u0930 \u092a\u0947\u091f \u0915\u0947\u092f\u0930",
+    heroTitle: "\u0915\u094d\u0932\u093f\u0928\u093f\u0915 \u0926\u0947\u0916\u092d\u093e\u0932 \u0938\u0947 \u0932\u0947\u0915\u0930 \u0918\u0930 \u092a\u0930 \u0915\u0947\u092f\u0930 \u0924\u0915, \u091a\u093f\u0915\u093f\u0924\u094d\u0938\u093e \u0915\u094b \u0938\u0930\u0932 \u092c\u0928\u093e\u090f\u0902\u0964",
+    heroCopy: "Consultation book \u0915\u0930\u0947\u0902, home visit request \u092d\u0947\u091c\u0947\u0902, vaccination care track \u0915\u0930\u0947\u0902 \u0914\u0930 pet essentials explore \u0915\u0930\u0947\u0902\u0964",
     bookNow: "\u0905\u092a\u0949\u0907\u0902\u091f\u092e\u0947\u0902\u091f \u092c\u0941\u0915 \u0915\u0930\u0947\u0902",
     whatsapp: "\u0935\u094d\u0939\u093e\u091f\u094d\u0938\u090f\u092a \u0915\u094d\u0932\u093f\u0928\u093f\u0915",
     rating: "Google rating focus",
     homeVisitBadge: "visit available",
     medicines: "medicines",
     emergency: "consult guidance",
-    heroCaption: "\u0926\u0947\u0935\u093e\u0938 \u092a\u0930\u093f\u0935\u093e\u0930\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f clinic consultation, vaccination care, wellness support \u0914\u0930 home visit\u0964",
-    trustEyebrow: "Pet parents Dog Mitra \u092a\u0930 \u092d\u0930\u094b\u0938\u093e \u0915\u094d\u092f\u094b\u0902 \u0915\u0930\u0924\u0947 \u0939\u0948\u0902",
-    trustTitle: "Clear communication \u0914\u0930 practical follow-up \u0915\u0947 \u0938\u093e\u0925 professional veterinary attention\u0964",
+    heroCaption: "Clinic consultations, vaccination care, wellness support, and home visits.",
+    trustEyebrow: "Why pet parents trust the clinic",
+    trustTitle: "Clear communication and practical follow-up with professional veterinary attention.",
     certified: "Veterinary doctor",
     homeCare: "Care at your doorstep",
     records: "Vaccination \u0914\u0930 care history",
     localTrust: "Trusted local clinic",
     doctorEyebrow: "Doctor profile",
-    doctorBio: "Dr. Sanjeev Kumre Dog Mitra \u0915\u094b dog wellness, preventive care, vaccination guidance, everyday illness support \u0914\u0930 pet parents \u0915\u0947 \u0932\u093f\u090f clear advice \u0915\u0947 \u0938\u093e\u0925 lead \u0915\u0930\u0924\u0947 \u0939\u0948\u0902\u0964",
+    doctorBio: "Veterinary care focused on dog wellness, preventive care, vaccination guidance, everyday illness support, and clear advice for pet parents.",
     specialization: "Specialization",
     specializationValue: "Dog consultation, vaccination, wellness \u0914\u0930 home care",
     languages: "Languages",
@@ -94,12 +94,12 @@ const translations = {
     faq1: "\u0915\u094d\u092f\u093e \u092e\u0948\u0902 home visit online book \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0942\u0902?",
     faq1Ans: "\u0939\u093e\u0901\u0964 Booking form \u092e\u0947\u0902 Home visit \u091a\u0941\u0928\u0947\u0902 \u0914\u0930 notes \u092e\u0947\u0902 \u0905\u092a\u0928\u093e address add \u0915\u0930\u0947\u0902\u0964",
     faq2: "\u0915\u094d\u092f\u093e \u092e\u0948\u0902 UPI \u0938\u0947 pay \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0942\u0902?",
-    faq2Ans: "\u0939\u093e\u0901\u0964 UPI payment \u0915\u0947 \u0932\u093f\u090f clinic \u0915\u0947 verified number \u0915\u093e use \u0915\u0930\u0947\u0902 \u0914\u0930 confirmation share \u0915\u0930\u0947\u0902\u0964",
+    faq2Ans: "Yes. Use the verified UPI number shown in the payment section and share the confirmation with the clinic.",
     faq3: "\u0915\u094d\u092f\u093e vaccination records maintain \u0939\u094b\u0924\u0947 \u0939\u0948\u0902?",
     faq3Ans: "Clinic returning customers \u0915\u0947 \u0932\u093f\u090f vaccination history \u0914\u0930 follow-up dates track \u0915\u0930\u0928\u0947 \u092e\u0947\u0902 help \u0915\u0930 \u0938\u0915\u0924\u093e \u0939\u0948\u0964",
     newsEyebrow: "News & Blogs",
-    newsTitle: "Dog Mitra \u0938\u0947 pet care updates, clinic news \u0914\u0930 practical guidance\u0964",
-    newsIntro: "Clinic team staff management area \u0938\u0947 health tips, seasonal care notes, vaccination guidance, product education \u0914\u0930 local announcements publish \u0915\u0930 \u0938\u0915\u0924\u0940 \u0939\u0948\u0964",
+    newsTitle: "Pet care updates, clinic news, and practical guidance.",
+    newsIntro: "Authorized staff can publish health tips, seasonal care notes, vaccination guidance, product education, and local announcements.",
     blogOneTitle: "Clinic visit \u0915\u0947 \u0932\u093f\u090f \u0905\u092a\u0928\u0947 dog \u0915\u094b \u0915\u0948\u0938\u0947 prepare \u0915\u0930\u0947\u0902",
     blogOneCopy: "Consultation \u0915\u0947 \u0926\u094c\u0930\u093e\u0928 safer handling, lower stress \u0914\u0930 better communication \u0915\u0947 \u0932\u093f\u090f simple steps\u0964",
     blogTwoTitle: "Vaccination records \u0915\u094d\u092f\u094b\u0902 \u091c\u0930\u0942\u0930\u0940 \u0939\u0948\u0902",
@@ -126,7 +126,7 @@ const translations = {
     refund: "Refund Policy",
     refundCopy: "Refunds \u092f\u093e replacements product condition, order status \u0914\u0930 clinic verification \u092a\u0930 depend \u0915\u0930\u0924\u0947 \u0939\u0948\u0902\u0964",
     shipping: "Shipping Policy",
-    shippingCopy: "Local fulfilment product availability \u0914\u0930 Dewas \u092e\u0947\u0902 delivery feasibility \u092a\u0930 depend \u0915\u0930\u0924\u093e \u0939\u0948\u0964",
+    shippingCopy: "Local fulfilment depends on product availability and delivery feasibility.",
     prescription: "Prescription Policy",
     prescriptionCopy: "Prescription medicines \u0915\u0947\u0935\u0932 veterinary guidance \u092e\u0947\u0902 use \u0915\u0930\u0947\u0902\u0964",
     doctorLabel: "Doctor:",
@@ -230,6 +230,8 @@ function applySettings() {
   if (heroCopy && site.homepageHeroSubtitle) heroCopy.textContent = site.homepageHeroSubtitle;
   const doctorName = document.querySelector("#doctorName");
   if (doctorName && site.doctor?.name) doctorName.textContent = site.doctor.name;
+  const footerDoctorName = document.querySelector("#footerDoctorName");
+  if (footerDoctorName && site.doctor?.name) footerDoctorName.textContent = site.doctor.name;
   const doctorBio = document.querySelector('[data-i18n="doctorBio"]');
   if (doctorBio && site.doctor?.bio) doctorBio.textContent = site.doctor.bio;
   const specializationValue = document.querySelector('[data-i18n="specializationValue"]');
@@ -276,6 +278,8 @@ function applySettings() {
     ].filter(Boolean).join(", ");
   }
   if (footerEmail && email) footerEmail.textContent = `Clinic email: ${email}`;
+  const localTrustCity = document.querySelector("#localTrustCity");
+  if (localTrustCity && contact.address?.city) localTrustCity.textContent = contact.address.city;
 
   const footerHours = document.querySelector("#footerHours");
   if (footerHours && hoursLabel && hoursOpen && hoursClose) {
@@ -535,10 +539,12 @@ function updateSchemaData({ contact, site }) {
     const address = contact.address || {};
     data.name = site.siteName || data.name;
     data.telephone = normalizePhone(contact.phone || site.contact?.phone || "");
+    data.founder = site.doctor?.name || data.founder;
     data.address.streetAddress = [address.line1, address.line2].filter(Boolean).join(", ") || data.address.streetAddress;
     data.address.addressLocality = address.city || data.address.addressLocality;
     data.address.addressRegion = address.state || data.address.addressRegion;
     data.address.postalCode = address.pincode || data.address.postalCode;
+    data.areaServed = address.city || data.areaServed;
     data.hasMap = contact.googleMapsLink || data.hasMap;
     script.textContent = JSON.stringify(data, null, 2);
   } catch (error) {
