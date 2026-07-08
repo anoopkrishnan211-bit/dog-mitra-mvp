@@ -6,7 +6,7 @@ const products = [
 ];
 
 const translations = { hi: {
-  brandTag: 'वेट क्लिनिक और पेट केयर', navServices: 'सेवाएं', navDoctor: 'डॉक्टर', navShop: 'शॉप', navBooking: 'बुकिंग', navContact: 'संपर्क', staffLogin: 'स्टाफ लॉगिन',
+  brandTag: 'वेट क्लिनिक और पेट केयर', navServices: 'सेवाएं', navDoctor: 'डॉक्टर', navShop: 'शॉप', navBooking: 'बुकिंग', navNews: 'न्यूज और ब्लॉग', navEvents: 'इवेंट्स', navContact: 'संपर्क', staffLogin: 'एडमिन लॉगिन',
   heroEyebrow: 'देवास में भरोसेमंद पशु चिकित्सा', heroTitle: 'क्लिनिक विजिट से लेकर घर पर देखभाल तक, dogs के लिए संवेदनशील care।', heroCopy: 'Dr. Sanjeev Kumre से सलाह लें, home visit book करें, vaccination care manage करें और Dog Mitra से genuine pet essentials खरीदें।', bookNow: 'अपॉइंटमेंट बुक करें', whatsapp: 'व्हाट्सऐप क्लिनिक', rating: 'Google rating focus', homeVisitBadge: 'visit available', medicines: 'medicines', emergency: 'consult guidance', heroCaption: 'देवास परिवारों के लिए clinic consultation, vaccination care, wellness support और home visit।',
   trustEyebrow: 'Pet parents Dog Mitra पर भरोसा क्यों करते हैं', trustTitle: 'Clear communication और practical follow-up के साथ professional veterinary attention।', certified: 'Veterinary doctor', homeCare: 'Care at your doorstep', records: 'Vaccination और care history', localTrust: 'Trusted local clinic',
   doctorEyebrow: 'Doctor profile', doctorBio: 'Dr. Sanjeev Kumre Dog Mitra को dog wellness, preventive care, vaccination guidance, everyday illness support और pet parents के लिए clear advice के साथ lead करते हैं।', specialization: 'Specialization', specializationValue: 'Dog consultation, vaccination, wellness और home care', languages: 'Languages', languagesValue: 'English, Hindi', timings: 'Consultation', timingsValue: 'आज की availability के लिए call या WhatsApp करें',
@@ -15,8 +15,10 @@ const translations = { hi: {
   bookingEyebrow: 'Appointment booking', bookingTitle: 'Care need share करें और clinic team next available slot confirm करेगी।', petParent: 'Pet parent', petName: 'Pet name', bookingType: 'Booking type', clinicVisit: 'Clinic visit', homeVisit: 'Home visit', vaccination: 'Vaccination', emergencyConsult: 'Emergency consultation', date: 'Preferred date', phone: 'Phone', notes: 'Care notes', fullName: 'पूरा नाम', petNamePh: 'Pet name', notesPh: 'Symptoms, vaccination due date, address, या visit reason', confirmBooking: 'Confirmation request करें',
   adminEyebrow: 'Clinic operations', adminTitle: 'Appointments, orders, products, pet records और customer follow-ups के लिए staff tools।', orders: 'Orders', appointments: 'Appointments', inventory: 'Inventory alerts', followups: 'Follow-ups', monthly: 'monthly', weekly: 'this week', lowStock: 'low stock', dueSoon: 'due soon',
   reviewEyebrow: 'Reviews and care stories', reviewTitle: 'Pet parents के लिए clear advice, careful handling और reliable follow-up।', testimonial: '"Clinic team ने हमारे dog को comfortable रखा और अगले care steps clearly समझाए।"', faq1: 'क्या मैं home visit online book कर सकता हूं?', faq1Ans: 'हाँ। Booking form में Home visit चुनें और notes में अपना address add करें।', faq2: 'क्या मैं UPI से pay कर सकता हूं?', faq2Ans: 'हाँ। UPI payment के लिए 9754240177 use करें और confirmation clinic के साथ share करें।', faq3: 'क्या vaccination records maintain होते हैं?', faq3Ans: 'Clinic returning customers के लिए vaccination history और follow-up dates track करने में help कर सकता है।',
+  newsEyebrow: 'News & Blogs', newsTitle: 'Dog Mitra से pet care updates, clinic news और practical guidance।', newsIntro: 'Clinic team staff management area से health tips, seasonal care notes, vaccination guidance, product education और local announcements publish कर सकती है।', blogOneTitle: 'Clinic visit के लिए अपने dog को कैसे prepare करें', blogOneCopy: 'Consultation के दौरान safer handling, lower stress और better communication के लिए simple steps।', blogTwoTitle: 'Vaccination records क्यों जरूरी हैं', blogTwoCopy: 'Updated records pet parents को preventive care और timely follow-ups plan करने में help करते हैं।', adminManaged: 'Staff managed', blogAdminTitle: 'News और blogs publish करें', blogAdminCopy: 'Authorized staff clinic news, blog articles, images, categories और SEO details add, edit, schedule और organize कर सकता है।', manageNews: 'Content manage करें',
+  eventsEyebrow: 'Upcoming events', eventsTitle: 'Health camps, vaccination drives, awareness sessions और community pet care activities।', eventsIntro: 'Staff title, date, time, location, capacity, registration status और event images fully control कर सकता है।', eventOneTitle: 'Vaccination awareness day', eventOneCopy: 'Core vaccinations, booster timelines और record maintenance पर pet parents के लिए guidance।', eventTwoTitle: 'Monsoon dog care session', eventTwoCopy: 'Monsoon में skin care, tick prevention, diet और safe walking routines के बारे में जानें।', addEvent: 'Add', eventAdminTitle: 'Upcoming events manage करें', eventAdminCopy: 'Authorized staff events create, update, publish, registrations close और archive कर सकता है।', manageEvents: 'Events manage करें',
   policiesEyebrow: 'Customer policies', policiesTitle: 'Appointments, orders, prescriptions, privacy और refunds के लिए transparent policies।', privacy: 'Privacy Policy', privacyCopy: 'Customer और pet details clinic communication, appointment support, order handling और care records के लिए use होते हैं।', refund: 'Refund Policy', refundCopy: 'Refunds या replacements product condition, order status और clinic verification पर depend करते हैं।', shipping: 'Shipping Policy', shippingCopy: 'Local fulfilment product availability और Dewas में delivery feasibility पर depend करता है।', prescription: 'Prescription Policy', prescriptionCopy: 'Prescription medicines केवल veterinary guidance में use करें।',
-  doctorLabel: 'Doctor:', hours: 'Clinic hours:', openMaps: 'Google Maps खोलें', cart: 'Cart', total: 'Total', upiPay: 'UPI payment number', upiHint: 'UPI payment के लिए इस number का use करें।', secureCheckout: 'UPI से pay करें', adminSecure: 'Website management', adminPortalLogin: 'Staff login', adminEmail: 'Email या phone', adminPassword: 'Password', loginManage: 'Login to manage site', manageProducts: 'Products', manageAppointments: 'Appointments', manageOrders: 'Orders', manageContent: 'Content', adminWelcome: 'Staff access request received. Secure access will be verified by the clinic administrator.', upiReady: 'UPI payment can be made on 9754240177. Please share the payment confirmation on WhatsApp.', added: 'Cart में जोड़ा', emptyCart: 'Cart खाली है।', bookingDone: 'Booking request received. Clinic team will contact you shortly.'
+  doctorLabel: 'Doctor:', hours: 'Clinic hours:', openMaps: 'Google Maps खोलें', cart: 'Cart', total: 'Total', upiPay: 'UPI payment number', upiHint: 'UPI payment के लिए इस number का use करें।', secureCheckout: 'UPI से pay करें', adminSecure: 'Website management', adminPortalLogin: 'Admin Login', adminEmail: 'Email या phone', adminPassword: 'Password', loginManage: 'Login to manage site', manageProducts: 'Products', manageAppointments: 'Appointments', manageOrders: 'Orders', manageContent: 'Content', manageBlogs: 'News & Blogs', manageEventsPanel: 'Events', adminWelcome: 'Admin access request received. Secure access will be verified by the clinic administrator.', upiReady: 'UPI payment can be made on 9754240177. Please share the payment confirmation on WhatsApp.', added: 'Cart में जोड़ा', emptyCart: 'Cart खाली है।', bookingDone: 'Booking request received. Clinic team will contact you shortly.'
 }};
 
 let activeFilter = 'all';
@@ -112,6 +114,7 @@ renderCart();
 
 const adminModal = document.querySelector('#adminModal');
 const adminLoginButton = document.querySelector('#adminLoginButton');
+const adminOpenButtons = document.querySelectorAll('.admin-open');
 const closeAdmin = document.querySelector('#closeAdmin');
 const adminLoginForm = document.querySelector('#adminLoginForm');
 const upiCheckout = document.querySelector('#upiCheckout');
@@ -122,6 +125,13 @@ if (adminLoginButton && adminModal) {
     adminModal.setAttribute('aria-hidden', 'false');
   });
 }
+adminOpenButtons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    if (!adminModal) return;
+    adminModal.classList.add('open');
+    adminModal.setAttribute('aria-hidden', 'false');
+  });
+});
 if (closeAdmin && adminModal) {
   closeAdmin.addEventListener('click', function() {
     adminModal.classList.remove('open');
@@ -134,7 +144,7 @@ if (closeAdmin && adminModal) {
 if (adminLoginForm) {
   adminLoginForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    document.querySelector('#adminStatus').textContent = t('adminWelcome', 'Staff access request received. Secure access will be verified by the clinic administrator.');
+    document.querySelector('#adminStatus').textContent = t('adminWelcome', 'Admin access request received. Secure access will be verified by the clinic administrator.');
   });
 }
 if (upiCheckout) {

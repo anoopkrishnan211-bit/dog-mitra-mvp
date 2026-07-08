@@ -49,15 +49,15 @@ p { color: var(--muted); line-height: 1.65; }
 .hero-photo img, .gallery img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
 .hero-photo figcaption { margin-top: 12px; color: var(--muted); font-weight: 700; }
 .trust-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
-.trust-strip span, .metric, .service-grid article, .product-card, details, .policy-grid article, .trust-grid article { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.trust-strip span, .metric, .service-grid article, .product-card, details, .policy-grid article, .trust-grid article, .content-grid article, .event-list article { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
 .trust-strip span { padding: 16px; }
 .trust-strip strong, .trust-strip small, .metric span, .metric small { display: block; }
 .trust-strip small, .metric small { color: var(--muted); margin-top: 4px; }
 .section { padding: clamp(46px, 7vw, 92px) clamp(18px, 4vw, 56px); }
 .section-heading { max-width: 780px; margin-bottom: 28px; }
 .trust-section, .appointments { background: var(--mist); }
-.trust-grid, .service-grid, .policy-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.trust-grid article, .policy-grid article { padding: 22px; }
+.trust-grid, .service-grid, .policy-grid, .content-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.trust-grid article, .policy-grid article, .content-grid article { padding: 22px; }
 .trust-grid strong { display: block; font-size: 28px; color: var(--forest); margin-bottom: 6px; }
 .trust-grid span { color: var(--muted); font-weight: 700; }
 .doctor-section { background: #fff; }
@@ -112,3 +112,14 @@ summary { cursor: pointer; font-weight: 800; }
 .admin-tools span { padding: 12px; border-radius: 8px; background: var(--sky); color: var(--forest); font-weight: 800; text-align: center; }
 @media (max-width: 1080px) { .nav-links { display: none; } .hero, .doctor-card, .split, .admin-band, .gallery-testimonials, .footer { grid-template-columns: 1fr; } .trust-grid, .service-grid, .policy-grid, .dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .site-header { align-items: flex-start; } .brand small { display: none; } h1 { font-size: 38px; } .hero { padding: 28px 18px; } .trust-strip, .product-grid, .booking-form, .trust-grid, .service-grid, .policy-grid, .dashboard { grid-template-columns: 1fr; } .gallery { grid-template-columns: 1fr; } .gallery img:first-child { grid-row: auto; } .wide { grid-column: auto; } .primary-btn, .secondary-btn, .ghost-btn, .icon-btn { width: 100%; } }
+.news-section { background: #fff; }
+.events-section { background: var(--mist); }
+.content-date { display: inline-flex; width: max-content; padding: 6px 10px; border-radius: 8px; background: var(--sky); color: var(--forest); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+.admin-control-card { border-color: rgba(31, 107, 79, 0.34) !important; background: linear-gradient(180deg, #ffffff, #f5fbf7) !important; }
+.event-list { display: grid; gap: 14px; max-width: 980px; }
+.event-list article { display: grid; grid-template-columns: 74px 1fr; gap: 18px; align-items: start; padding: 18px; }
+.event-date { display: grid; place-items: center; min-height: 74px; border-radius: 8px; background: var(--forest); color: #fff; text-align: center; }
+.event-date strong { display: block; font-size: 28px; line-height: 1; }
+.event-date span { display: block; margin-top: 4px; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+.admin-open { margin-top: 10px; }
+@media (max-width: 640px) { .content-grid { grid-template-columns: 1fr; } .event-list article { grid-template-columns: 1fr; } .event-date { width: 74px; } }

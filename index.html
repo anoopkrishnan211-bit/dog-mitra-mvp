@@ -49,11 +49,13 @@
         <a href="#doctor" data-i18n="navDoctor">Doctor</a>
         <a href="#shop" data-i18n="navShop">Shop</a>
         <a href="#appointments" data-i18n="navBooking">Booking</a>
+        <a href="#news" data-i18n="navNews">News & Blogs</a>
+        <a href="#events" data-i18n="navEvents">Events</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
-        <button class="admin-link" id="adminLoginButton" type="button" data-i18n="staffLogin">Staff Login</button>
       </nav>
       <div class="header-actions">
-        <button class="ghost-btn" id="languageToggle" type="button" aria-label="Switch language">à¤¹à¤¿à¤‚à¤¦à¥€</button>
+        <button class="ghost-btn" id="languageToggle" type="button" aria-label="Switch language">हिंदी</button>
+        <button class="admin-link" id="adminLoginButton" type="button" data-i18n="staffLogin">Admin Login</button>
         <a class="icon-btn" href="tel:+919754240177" aria-label="Call Dog Mitra">Call</a>
       </div>
     </header>
@@ -188,6 +190,34 @@
         </div>
       </section>
 
+
+
+      <section class="section news-section" id="news">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="newsEyebrow">News & Blogs</p>
+          <h2 data-i18n="newsTitle">Pet care updates, clinic news, and practical guidance from Dog Mitra.</h2>
+          <p data-i18n="newsIntro">The clinic team can publish health tips, seasonal care notes, vaccination guidance, product education, and local announcements from the staff management area.</p>
+        </div>
+        <div class="content-grid">
+          <article><span class="content-date">Care Guide</span><h3 data-i18n="blogOneTitle">How to prepare your dog for a clinic visit</h3><p data-i18n="blogOneCopy">Simple steps for safer handling, lower stress, and better communication during consultations.</p></article>
+          <article><span class="content-date">Vaccination</span><h3 data-i18n="blogTwoTitle">Why vaccination records matter</h3><p data-i18n="blogTwoCopy">Keeping records updated helps pet parents plan preventive care and timely follow-ups.</p></article>
+          <article class="admin-control-card"><span class="content-date" data-i18n="adminManaged">Staff managed</span><h3 data-i18n="blogAdminTitle">Publish news and blogs</h3><p data-i18n="blogAdminCopy">Authorized staff can add, edit, schedule, and organize clinic news, blog articles, images, categories, and SEO details.</p><button class="secondary-btn admin-open" type="button" data-i18n="manageNews">Manage content</button></article>
+        </div>
+      </section>
+
+      <section class="section events-section" id="events">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="eventsEyebrow">Upcoming events</p>
+          <h2 data-i18n="eventsTitle">Health camps, vaccination drives, awareness sessions, and community pet care activities.</h2>
+          <p data-i18n="eventsIntro">Events can be fully controlled by staff, including title, date, time, location, capacity, registration status, and event images.</p>
+        </div>
+        <div class="event-list">
+          <article><div class="event-date"><strong>18</strong><span>Jul</span></div><div><h3 data-i18n="eventOneTitle">Vaccination awareness day</h3><p data-i18n="eventOneCopy">Guidance for pet parents on core vaccinations, booster timelines, and record maintenance.</p></div></article>
+          <article><div class="event-date"><strong>27</strong><span>Jul</span></div><div><h3 data-i18n="eventTwoTitle">Monsoon dog care session</h3><p data-i18n="eventTwoCopy">Learn about skin care, tick prevention, diet, and safe walking routines during monsoon.</p></div></article>
+          <article class="admin-control-card"><div class="event-date"><strong>+</strong><span data-i18n="addEvent">Add</span></div><div><h3 data-i18n="eventAdminTitle">Manage upcoming events</h3><p data-i18n="eventAdminCopy">Authorized staff can create, update, publish, close registrations, and archive events from the management area.</p><button class="secondary-btn admin-open" type="button" data-i18n="manageEvents">Manage events</button></div></article>
+        </div>
+      </section>
+
       <section class="section legal-section" id="policies">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="policiesEyebrow">Customer policies</p>
@@ -211,7 +241,9 @@
       <div class="cart-content"><button class="close-btn" id="closeCart" type="button" aria-label="Close cart">x</button><h2 data-i18n="cart">Cart</h2><div id="cartItems"></div><div class="cart-total"><span data-i18n="total">Total</span><strong id="cartTotal">Rs. 0</strong></div><div class="upi-box"><span data-i18n="upiPay">UPI payment number</span><strong>9754240177</strong><small data-i18n="upiHint">Use this number for UPI payments.</small></div><button class="primary-btn" id="upiCheckout" type="button" data-i18n="secureCheckout">Pay via UPI</button></div>
     </div>
 
-    <div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle"><button class="close-btn" id="closeAdmin" type="button" aria-label="Close staff login">x</button><p class="eyebrow" data-i18n="adminSecure">Website management</p><h2 id="adminModalTitle" data-i18n="adminPortalLogin">Staff login</h2><form class="admin-form" id="adminLoginForm"><label><span data-i18n="adminEmail">Email or phone</span><input name="admin" required placeholder="admin@dogmitra.in"></label><label><span data-i18n="adminPassword">Password</span><input name="password" required type="password" placeholder="Enter password"></label><button class="primary-btn" type="submit" data-i18n="loginManage">Login to manage site</button><p class="form-status" id="adminStatus" role="status"></p></form><div class="admin-tools"><span data-i18n="manageProducts">Products</span><span data-i18n="manageAppointments">Appointments</span><span data-i18n="manageOrders">Orders</span><span data-i18n="manageContent">Content</span></div></div></div>
+    <div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle"><button class="close-btn" id="closeAdmin" type="button" aria-label="Close admin login">x</button><p class="eyebrow" data-i18n="adminSecure">Website management</p><h2 id="adminModalTitle" data-i18n="adminPortalLogin">Admin Login</h2><form class="admin-form" id="adminLoginForm"><label><span data-i18n="adminEmail">Email or phone</span><input name="admin" required placeholder="admin@dogmitra.in"></label><label><span data-i18n="adminPassword">Password</span><input name="password" required type="password" placeholder="Enter password"></label><button class="primary-btn" type="submit" data-i18n="loginManage">Login to manage site</button><p class="form-status" id="adminStatus" role="status"></p></form><div class="admin-tools"><span data-i18n="manageProducts">Products</span><span data-i18n="manageAppointments">Appointments</span><span data-i18n="manageOrders">Orders</span><span data-i18n="manageContent">Content</span><span data-i18n="manageBlogs">News & Blogs</span><span data-i18n="manageEventsPanel">Events</span></div></div></div>
     <script src="script.js"></script>
   </body>
 </html>
+
+
