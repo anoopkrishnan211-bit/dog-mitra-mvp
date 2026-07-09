@@ -1,5 +1,5 @@
 const express = require("express");
-const models = require("../../../models");
+const models = require("../../models");
 const { catchAsync } = require("../utils/catchAsync");
 
 const router = express.Router();
