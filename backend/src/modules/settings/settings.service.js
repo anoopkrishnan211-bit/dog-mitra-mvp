@@ -10,26 +10,33 @@ async function seedSettings() {
     SiteSettings.findOne({ settingsKey: SETTINGS_KEY }),
   ]);
 
+  await Promise.all([
+    ContactInformation.updateMany(
+      { settingsKey: { $exists: false } },
+      { $set: { settingsKey: SETTINGS_KEY } },
+      { runValidators: false },
+    ),
+    SiteSettings.updateMany(
+      { settingsKey: { $exists: false } },
+      { $set: { settingsKey: SETTINGS_KEY } },
+      { runValidators: false },
+    ),
+  ]);
+
   if (!contactDefault) {
-    const legacyContact = await ContactInformation.findOne({}).sort({ updatedAt: -1 });
-    if (legacyContact) {
-      await ContactInformation.deleteMany({ settingsKey: { $exists: false }, _id: { $ne: legacyContact._id } });
-      legacyContact.settingsKey = SETTINGS_KEY;
-      await legacyContact.save();
-    } else {
-      await ContactInformation.create(DEFAULT_CONTACT);
-    }
+    await ContactInformation.findOneAndUpdate(
+      { settingsKey: SETTINGS_KEY },
+      { $setOnInsert: DEFAULT_CONTACT },
+      { new: true, upsert: true, runValidators: true, setDefaultsOnInsert: true },
+    );
   }
 
   if (!siteDefault) {
-    const legacySite = await SiteSettings.findOne({}).sort({ updatedAt: -1 });
-    if (legacySite) {
-      await SiteSettings.deleteMany({ settingsKey: { $exists: false }, _id: { $ne: legacySite._id } });
-      legacySite.settingsKey = SETTINGS_KEY;
-      await legacySite.save();
-    } else {
-      await SiteSettings.create(DEFAULT_SITE);
-    }
+    await SiteSettings.findOneAndUpdate(
+      { settingsKey: SETTINGS_KEY },
+      { $setOnInsert: DEFAULT_SITE },
+      { new: true, upsert: true, runValidators: true, setDefaultsOnInsert: true },
+    );
   }
 }
 

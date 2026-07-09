@@ -4,7 +4,7 @@ const { buildBaseSchema } = require("./_base");
 const PasswordResetTokenSchema = buildBaseSchema({
   staffId: { type: mongoose.Schema.Types.ObjectId, ref: "Staff", required: true, index: true },
   tokenHash: { type: String, required: true, select: false, index: true },
-  expiresAt: { type: Date, required: true, index: true },
+  expiresAt: { type: Date, required: true },
   usedAt: { type: Date },
   requestedIp: { type: String, trim: true },
   requestedUserAgent: { type: String, trim: true },

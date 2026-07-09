@@ -4,7 +4,7 @@ const { buildBaseSchema } = require("./_base");
 const AuthSessionSchema = buildBaseSchema({
   staffId: { type: mongoose.Schema.Types.ObjectId, ref: "Staff", required: true, index: true },
   refreshTokenHash: { type: String, required: true, select: false, index: true },
-  expiresAt: { type: Date, required: true, index: true },
+  expiresAt: { type: Date, required: true },
   revokedAt: { type: Date },
   revokedReason: { type: String, trim: true, maxlength: 255 },
   ip: { type: String, trim: true },
