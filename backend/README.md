@@ -68,3 +68,4 @@ This folder contains the production backend for Dog Mitra.
 - Admin routes are reserved for the `admin` role unless noted otherwise.
 - CRUD behavior is implemented through reusable controller, service, and repository layers.
 - Initial super admin bootstrap can be provided via `SUPER_ADMIN_*` environment variables.
+- `GET /health` returns service status, version, environment, uptime, timestamp, MongoDB connection state, database name, and Node.js version.
