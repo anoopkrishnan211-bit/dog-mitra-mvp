@@ -1,5 +1,6 @@
 const express = require("express");
 const models = require("../../models");
+const { getPublicSettings } = require("../modules/settings/settings.service");
 const { catchAsync } = require("../utils/catchAsync");
 
 const router = express.Router();
@@ -19,5 +20,9 @@ router.get("/faqs", listPublic(models.FAQ, { active: true }, { sort: "sortOrder 
 router.get("/testimonials", listPublic(models.Testimonial, { approved: true }, { sort: "-featured -rating -createdAt" }));
 router.get("/gallery", listPublic(models.Gallery, { active: true }, { sort: "-featured sortOrder -createdAt" }));
 router.get("/events", listPublic(models.Event, { status: "published" }, { sort: "eventDate" }));
+router.get("/settings", catchAsync(async (_req, res) => {
+  const data = await getPublicSettings();
+  res.status(200).json(data);
+}));
 
 module.exports = { publicRouter: router };

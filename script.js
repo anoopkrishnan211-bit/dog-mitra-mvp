@@ -494,6 +494,8 @@ function fillSettingsForm() {
 function serializeSettingsForm() {
   if (!settingsForm) return {};
   const get = (name) => settingsForm.elements.namedItem(name)?.value?.trim();
+  const logoUrl = get("site.branding.logoUrl");
+  const faviconUrl = get("site.branding.faviconUrl");
   return {
     contact: {
       phone: get("contact.phone"),
@@ -558,8 +560,8 @@ function serializeSettingsForm() {
         googleBusiness: get("site.socialLinks.googleBusiness"),
       },
       branding: {
-        logoUrl: get("site.branding.logoUrl"),
-        faviconUrl: get("site.branding.faviconUrl"),
+        ...(logoUrl ? { logoUrl } : {}),
+        ...(faviconUrl ? { faviconUrl } : {}),
       },
       seo: {
         title: get("site.seo.title"),
