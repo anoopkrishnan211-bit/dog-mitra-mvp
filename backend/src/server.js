@@ -6,6 +6,7 @@ const { seedSettings } = require("./modules/settings/settings.service");
 
 async function main() {
   await connectMongo();
+  console.log(`[MongoDB] Active database: ${env.mongoDbName}`);
   if (env.initialSuperAdmin.name && env.initialSuperAdmin.username && env.initialSuperAdmin.email && env.initialSuperAdmin.phone && env.initialSuperAdmin.password) {
     await ensureAdminSeed(env.initialSuperAdmin);
   }

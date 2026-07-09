@@ -9,6 +9,7 @@ module.exports = {
   Order: require("./Order"),
   Testimonial: require("./Testimonial"),
   Gallery: require("./Gallery"),
+  Event: require("./Event"),
   Service: require("./Service"),
   BlogPost: require("./BlogPost"),
   FAQ: require("./FAQ"),

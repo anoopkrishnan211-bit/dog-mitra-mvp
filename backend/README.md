@@ -20,11 +20,11 @@ This folder contains the production backend for Dog Mitra.
 
 ## API Base
 
-- `http://localhost:4000/api`
+- `https://dog-mitra-backend.onrender.com/api`
 
 ## Documentation
 
-- Swagger UI: `http://localhost:4000/docs`
+- Swagger UI: `https://dog-mitra-backend.onrender.com/docs`
 
 ## Endpoint Groups
 
@@ -53,6 +53,13 @@ This folder contains the production backend for Dog Mitra.
 - `GET|POST|PATCH|DELETE /faqs`
 - `GET|POST|PATCH|DELETE /contact-information`
 - `GET|POST|PATCH|DELETE /site-settings`
+- `GET /public/products`
+- `GET /public/services`
+- `GET /public/blogs`
+- `GET /public/faqs`
+- `GET /public/gallery`
+- `GET /public/testimonials`
+- `GET /public/events`
 
 ## Notes
 

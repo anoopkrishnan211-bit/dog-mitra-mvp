@@ -1,10 +1,3 @@
-const products = [
-  { id: 1, name: "Chicken & Rice Puppy Formula", hi: "\u0905\u0921\u094d\u092f\u0942\u0932\u094d\u091f \u092a\u092a\u0940 \u092b\u0942\u0921", category: "food", price: 1299, image: "https://images.unsplash.com/photo-1546447147-3fc2b2c2c3f8?auto=format&fit=crop&w=900&q=80" },
-  { id: 2, name: "Gentle Coat & Skin Wash", hi: "\u0938\u094d\u0915\u093f\u0928 \u0915\u0947\u092f\u0930 \u0935\u093e\u0936", category: "care", price: 499, image: "https://images.unsplash.com/photo-1558929995-45d0f8d9f7f8?auto=format&fit=crop&w=900&q=80" },
-  { id: 3, name: "Comfort Harness", hi: "\u0915\u092e\u094d\u092b\u094b\u0930\u094d\u091f \u0939\u093e\u0930\u094d\u0928\u0947\u0938", category: "accessory", price: 799, image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" },
-  { id: 4, name: "Dental Chew Pack", hi: "\u0921\u0947\u0902\u091f\u0932 \u091a\u094d\u092f\u0942 \u092a\u0948\u0915", category: "care", price: 349, image: "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=900&q=80" }
-];
-
 const translations = {
   hi: {
     brandTag: "\u0935\u0947\u091f \u0915\u094d\u0932\u093f\u0928\u093f\u0915 \u0914\u0930 \u092a\u0947\u091f \u0915\u0947\u092f\u0930",
@@ -159,6 +152,19 @@ const translations = {
 let activeFilter = "all";
 let currentLang = "en";
 const cart = [];
+let productCatalog = [];
+let publicContent = {
+  services: [],
+  blogs: [],
+  faqs: [],
+  testimonials: [],
+  gallery: [],
+  events: [],
+};
+const authState = {
+  accessToken: "",
+  refreshToken: "",
+};
 const grid = document.querySelector("#productGrid");
 const search = document.querySelector("#productSearch");
 const cartCount = document.querySelector("#cartCount");
@@ -176,15 +182,15 @@ const settingsCache = {
   contact: null,
   site: null
 };
-const apiBase = window.location.origin && window.location.origin !== "null" ? "/api" : "http://localhost:4000/api";
+const apiBase = (window.DOG_MITRA_CONFIG && window.DOG_MITRA_CONFIG.apiBaseUrl) || window.API_BASE_URL || "https://dog-mitra-backend.onrender.com/api";
 
 function getToken() {
-  return localStorage.getItem("dogmitra.accessToken") || "";
+  return authState.accessToken || "";
 }
 
 function setAuthTokens(tokens) {
-  if (tokens.accessToken) localStorage.setItem("dogmitra.accessToken", tokens.accessToken);
-  if (tokens.refreshToken) localStorage.setItem("dogmitra.refreshToken", tokens.refreshToken);
+  authState.accessToken = tokens.accessToken || "";
+  authState.refreshToken = tokens.refreshToken || "";
 }
 
 async function loadSettings() {
@@ -198,6 +204,43 @@ async function loadSettings() {
     fillSettingsForm();
   } catch (error) {
     console.warn("Settings load failed", error);
+  }
+}
+
+async function loadPublicContent() {
+  try {
+    const [productsRes, servicesRes, blogsRes, faqsRes, testimonialsRes, galleryRes, eventsRes] = await Promise.all([
+      fetch(`${apiBase}/public/products`),
+      fetch(`${apiBase}/public/services`),
+      fetch(`${apiBase}/public/blogs`),
+      fetch(`${apiBase}/public/faqs`),
+      fetch(`${apiBase}/public/testimonials`),
+      fetch(`${apiBase}/public/gallery`),
+      fetch(`${apiBase}/public/events`),
+    ]);
+    const [products, services, blogs, faqs, testimonials, gallery] = await Promise.all([
+      productsRes.ok ? productsRes.json() : Promise.resolve({ items: [] }),
+      servicesRes.ok ? servicesRes.json() : Promise.resolve({ items: [] }),
+      blogsRes.ok ? blogsRes.json() : Promise.resolve({ items: [] }),
+      faqsRes.ok ? faqsRes.json() : Promise.resolve({ items: [] }),
+      testimonialsRes.ok ? testimonialsRes.json() : Promise.resolve({ items: [] }),
+      galleryRes.ok ? galleryRes.json() : Promise.resolve({ items: [] }),
+    ]);
+    const events = eventsRes.ok ? await eventsRes.json() : { items: [] };
+
+    productCatalog = products.items || [];
+    publicContent = {
+      services: services.items || [],
+      blogs: blogs.items || [],
+      faqs: faqs.items || [],
+      testimonials: testimonials.items || [],
+      gallery: gallery.items || [],
+      events: events.items || [],
+    };
+    renderProducts();
+    renderPublicSections();
+  } catch (error) {
+    console.warn("Public content load failed", error);
   }
 }
 
@@ -567,20 +610,79 @@ function updateSchemaData({ contact, site }) {
 function money(value) { return "Rs. " + value.toLocaleString("en-IN"); }
 function t(key, fallback) { return currentLang === "hi" ? (translations.hi[key] || fallback) : fallback; }
 function productName(product) { return currentLang === "hi" ? product.hi : product.name; }
+function getText(value, fallback = "") {
+  if (Array.isArray(value)) return value.join(", ");
+  if (typeof value === "string") return value;
+  return fallback;
+}
 
 function renderProducts() {
   const term = search.value.trim().toLowerCase();
-  const visible = products.filter(function(product) {
-    return (activeFilter === "all" || product.category === activeFilter) && product.name.toLowerCase().includes(term);
+  const visible = productCatalog.filter(function(product) {
+    const name = (product.name || "").toLowerCase();
+    const category = (product.categoryId?.name || product.category || "").toLowerCase();
+    return (activeFilter === "all" || category.includes(activeFilter)) && (name.includes(term) || (product.shortDescription || "").toLowerCase().includes(term));
   });
-  grid.innerHTML = visible.map(function(product) {
+  grid.innerHTML = visible.map(function(product, index) {
+    const image = (product.images && product.images[0]) || product.image || "/assets/dog-mitra-logo.png";
+    const category = product.categoryId?.name || product.category || "Product";
+    const id = product._id || product.id || index;
     return '<article class="product-card">' +
-      '<img src="' + product.image + '" alt="' + product.name + '" loading="lazy">' +
-      '<h3>' + productName(product) + '</h3>' +
-      '<div class="product-meta"><span>' + product.category + '</span><strong>' + money(product.price) + '</strong></div>' +
-      '<button class="primary-btn" type="button" data-add="' + product.id + '">' + (currentLang === "hi" ? "Cart में जोड़ें" : "Add to cart") + '</button>' +
+      '<img src="' + image + '" alt="' + (product.name || "Dog Mitra product") + '" loading="lazy">' +
+      '<h3>' + productName({ name: product.name || "", hi: product.name || "" }) + '</h3>' +
+      '<p>' + (product.shortDescription || product.description || "") + '</p>' +
+      '<div class="product-meta"><span>' + category + '</span><strong>' + money(Number(product.salePrice || product.price || 0)) + '</strong></div>' +
+      '<button class="primary-btn" type="button" data-add="' + id + '">' + (currentLang === "hi" ? "Cart में जोड़ें" : "Add to cart") + '</button>' +
     '</article>';
   }).join("");
+}
+
+function renderPublicSections() {
+  const servicesSection = document.querySelector("#services .service-grid");
+  if (servicesSection) {
+    const services = publicContent.services.length ? publicContent.services : [];
+    if (services.length) {
+      servicesSection.innerHTML = services.map(function(service) {
+        return '<article><span class="service-icon">•</span><h3>' + (service.title || "") + '</h3><p>' + (service.summary || service.description || "") + '</p><a href="#appointments">Book now</a></article>';
+      }).join("");
+    }
+  }
+
+  const newsSection = document.querySelector("#news .content-grid");
+  if (newsSection && publicContent.blogs.length) {
+    newsSection.innerHTML = publicContent.blogs.map(function(post) {
+      return '<article><span class="content-date">' + (post.category || "Blog") + '</span><h3>' + (post.title || "") + '</h3><p>' + (post.excerpt || "") + '</p></article>';
+    }).join("");
+  }
+
+  const faqList = document.querySelector("#faq");
+  if (faqList && publicContent.faqs.length) {
+    faqList.innerHTML = publicContent.faqs.map(function(faq, index) {
+      return '<details' + (index === 0 ? " open" : "") + '><summary>' + (faq.question || "") + '</summary><p>' + (faq.answer || "") + '</p></details>';
+    }).join("");
+  }
+
+  const gallery = document.querySelector(".gallery");
+  if (gallery && publicContent.gallery.length) {
+    gallery.innerHTML = publicContent.gallery.slice(0, 3).map(function(item) {
+      return '<img src="' + (item.mediaUrl || item.thumbnailUrl || "/assets/dog-mitra-logo.png") + '" alt="' + (item.altText || item.title || "Dog Mitra gallery image") + '" loading="lazy">';
+    }).join("");
+  }
+
+  const testimonials = document.querySelector("#gallery blockquote");
+  if (testimonials && publicContent.testimonials.length) {
+    testimonials.textContent = publicContent.testimonials[0].quote || testimonials.textContent;
+  }
+
+  const eventList = document.querySelector("#events .event-list");
+  if (eventList && publicContent.events.length) {
+    eventList.innerHTML = publicContent.events.map(function(item) {
+      const date = item.eventDate ? new Date(item.eventDate) : null;
+      const day = date ? String(date.getDate()).padStart(2, "0") : "";
+      const month = date ? date.toLocaleString("en-IN", { month: "short" }) : "";
+      return '<article><div class="event-date"><strong>' + day + '</strong><span>' + month + '</span></div><div><h3>' + (item.title || "") + '</h3><p>' + (item.summary || item.description || "") + '</p></div></article>';
+    }).join("");
+  }
 }
 
 function renderCart() {
@@ -609,7 +711,7 @@ search.addEventListener("input", renderProducts);
 grid.addEventListener("click", function(event) {
   const button = event.target.closest("[data-add]");
   if (!button) return;
-  const product = products.find(function(item) { return item.id === Number(button.dataset.add); });
+  const product = productCatalog.find(function(item, index) { return String(item._id || item.id || index) === String(button.dataset.add); });
   cart.push(product);
   renderCart();
   button.textContent = t("added", "Added");
@@ -645,6 +747,7 @@ document.querySelector("#languageToggle").addEventListener("click", function() {
 renderProducts();
 renderCart();
 loadSettings();
+loadPublicContent();
 
 const adminModal = document.querySelector("#adminModal");
 const adminLoginButton = document.querySelector("#adminLoginButton");

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { buildBaseSchema } = require("./_base");
 
 const ContactInformationSchema = buildBaseSchema({
+  settingsKey: { type: String, required: true, unique: true, index: true, immutable: true, default: "default" },
   clinicName: { type: String, required: true, trim: true, maxlength: 160, default: "Dog Mitra" },
   phone: { type: String, required: true, trim: true, index: true },
   whatsapp: { type: String, trim: true, index: true },

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { buildBaseSchema } = require("./_base");
 
 const SiteSettingsSchema = buildBaseSchema({
+  settingsKey: { type: String, required: true, unique: true, index: true, immutable: true, default: "default" },
   siteName: { type: String, required: true, trim: true, default: "Dog Mitra", maxlength: 160 },
   logoUrl: { type: String, trim: true },
   faviconUrl: { type: String, trim: true },

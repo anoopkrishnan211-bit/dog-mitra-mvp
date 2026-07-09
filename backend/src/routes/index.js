@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const { authController } = require("../modules/auth/auth.controller");
 const { authenticate, authorize } = require("../middlewares/auth");
 const { createResourceModule } = require("../modules/resourceFactory");
@@ -37,6 +38,28 @@ router.use("/site-settings", createResourceModule(models.SiteSettings, ["admin"]
 router.use("/settings", settingsRouter);
 
 router.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
+router.get("/health/db", async (_req, res, next) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ status: "down", connected: false, readyState: mongoose.connection.readyState });
+    }
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    const counts = {};
+    for (const collection of collections) {
+      counts[collection.name] = await mongoose.connection.db.collection(collection.name).countDocuments();
+    }
+    return res.status(200).json({
+      status: "up",
+      connected: true,
+      database: mongoose.connection.name,
+      readyState: mongoose.connection.readyState,
+      collections: collections.map((item) => item.name),
+      counts,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
 router.get("/me", authenticate, authorize(...publicReadRoles), (req, res) => res.json({ user: req.user }));
 
 module.exports = { apiRouter: router };

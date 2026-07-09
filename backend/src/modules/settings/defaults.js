@@ -1,4 +1,5 @@
 const DEFAULT_CONTACT = {
+  settingsKey: "default",
   clinicName: "Dog Mitra",
   phone: "+91 85903 24142",
   whatsapp: "+91 85903 24142",
@@ -31,6 +32,7 @@ const DEFAULT_CONTACT = {
 };
 
 const DEFAULT_SITE = {
+  settingsKey: "default",
   siteName: "Dog Mitra",
   logoUrl: "/assets/dog-mitra-logo.png",
   faviconUrl: "/assets/dog-mitra-logo.png",
