@@ -32,6 +32,7 @@ router.use("/testimonials", createResourceModule(models.Testimonial, ["admin", "
 router.use("/gallery", createResourceModule(models.Gallery, ["admin", "content"]).router);
 router.use("/services", createResourceModule(models.Service, ["admin", "content"]).router);
 router.use("/blog-posts", createResourceModule(models.BlogPost, ["admin", "content"]).router);
+router.use("/events", createResourceModule(models.Event, ["admin", "content"]).router);
 router.use("/faqs", createResourceModule(models.FAQ, ["admin", "content"]).router);
 router.use("/contact-information", createResourceModule(models.ContactInformation, ["admin", "content"]).router);
 router.use("/site-settings", createResourceModule(models.SiteSettings, ["admin"]).router);

@@ -178,11 +178,33 @@ const upiNumber = document.querySelector("#upiNumber");
 const upiHintText = document.querySelector("#upiHintText");
 const paymentMethodText = document.querySelector("#paymentMethodText");
 const footerEmail = document.querySelector("#footerEmail");
+const adminWorkspace = document.querySelector("#adminWorkspace");
+const adminTools = document.querySelector("#adminTools");
 const settingsCache = {
   contact: null,
   site: null
 };
 const apiBase = (window.DOG_MITRA_CONFIG && window.DOG_MITRA_CONFIG.apiBaseUrl) || window.API_BASE_URL || "https://dog-mitra-backend.onrender.com/api";
+const adminSectionConfigs = {
+  products: { title: "Products", endpoint: "/products", itemLabel: (item) => item.name || item.slug || item.sku || item._id, template: { name: "", slug: "", sku: "", categoryId: "", description: "", price: 0, active: true, featured: false, images: [] } },
+  appointments: { title: "Appointments", endpoint: "/appointments", itemLabel: (item) => item.reason || item._id, template: { customerId: "", petId: "", scheduledAt: "", reason: "", status: "requested" } },
+  orders: { title: "Orders", endpoint: "/orders", itemLabel: (item) => item.orderNumber || item._id, template: { orderNumber: "", customerId: "", items: [], subtotal: 0, totalAmount: 0, status: "pending" } },
+  content: { title: "Content", endpoint: "/services", itemLabel: (item) => item.title || item._id, template: { title: "", slug: "", summary: "", description: "", active: true, featured: false } },
+  blogs: { title: "News & Blogs", endpoint: "/blog-posts", itemLabel: (item) => item.title || item.slug || item._id, template: { title: "", slug: "", excerpt: "", content: "", status: "draft", featured: false } },
+  events: { title: "Events", endpoint: "/events", itemLabel: (item) => item.title || item.slug || item._id, template: { title: "", slug: "", summary: "", eventDate: "", status: "draft", registrationEnabled: true, featured: false } },
+  settings: { title: "Settings", endpoint: null },
+  faqs: { title: "FAQs", endpoint: "/faqs", itemLabel: (item) => item.question || item._id, template: { question: "", answer: "", category: "", active: true, sortOrder: 0 } },
+  testimonials: { title: "Testimonials", endpoint: "/testimonials", itemLabel: (item) => item.customerName || item._id, template: { customerName: "", rating: 5, quote: "", approved: false, featured: false } },
+  gallery: { title: "Gallery", endpoint: "/gallery", itemLabel: (item) => item.title || item._id, template: { title: "", category: "general", mediaUrl: "", altText: "", active: true, featured: false } },
+  customers: { title: "Customers", endpoint: "/customers", itemLabel: (item) => item.name || item.phone || item._id, template: { name: "", phone: "", active: true } },
+  pets: { title: "Pets", endpoint: "/pets", itemLabel: (item) => item.name || item._id, template: { customerId: "", name: "", species: "dog", breed: "", active: true } },
+  inventory: { title: "Inventory", endpoint: "/inventory", itemLabel: (item) => item.sku || item._id, template: { productId: "", sku: "", stockOnHand: 0, reservedStock: 0, reorderLevel: 0 } },
+  staff: { title: "Staff", endpoint: "/staff", itemLabel: (item) => item.name || item.username || item._id, template: { name: "", username: "", email: "", phone: "", role: "support", active: true } },
+  categories: { title: "Categories", endpoint: "/categories", itemLabel: (item) => item.name || item.slug || item._id, template: { name: "", slug: "", active: true } },
+};
+let activeAdminSection = "settings";
+let activeAdminItemId = "";
+let adminSectionItems = [];
 
 function getToken() {
   return authState.accessToken || "";
@@ -191,6 +213,178 @@ function getToken() {
 function setAuthTokens(tokens) {
   authState.accessToken = tokens.accessToken || "";
   authState.refreshToken = tokens.refreshToken || "";
+}
+
+function adminEndpoint(section) {
+  const config = adminSectionConfigs[section];
+  return config?.endpoint ? `${apiBase}${config.endpoint}` : "";
+}
+
+function setAdminStatus(message) {
+  if (adminStatus) adminStatus.textContent = message || "";
+}
+
+function showAdminSection(section) {
+  activeAdminSection = section;
+  activeAdminItemId = "";
+  adminSectionItems = [];
+
+  if (settingsForm) settingsForm.hidden = section !== "settings";
+  if (adminWorkspace) adminWorkspace.hidden = section === "settings";
+
+  if (section === "settings") {
+    loadSettings();
+    return;
+  }
+
+  renderAdminWorkspace();
+  loadAdminSection();
+}
+
+function resourceTemplate(section) {
+  const config = adminSectionConfigs[section];
+  return config ? JSON.parse(JSON.stringify(config.template || {})) : {};
+}
+
+function resourceTitle(section, item) {
+  const config = adminSectionConfigs[section];
+  return config?.itemLabel ? config.itemLabel(item) : item?.title || item?._id || "Item";
+}
+
+async function loadAdminSection() {
+  const endpoint = adminEndpoint(activeAdminSection);
+  if (!endpoint) return;
+  try {
+    const response = await fetch(endpoint, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.message || "Unable to load section");
+    adminSectionItems = data.items || [];
+    renderAdminWorkspace();
+  } catch (error) {
+    setAdminStatus(error.message);
+    if (adminWorkspace) {
+      adminWorkspace.innerHTML = `<p class="form-status">${error.message}</p>`;
+    }
+  }
+}
+
+function renderAdminWorkspace() {
+  if (!adminWorkspace) return;
+  const config = adminSectionConfigs[activeAdminSection];
+  if (!config || activeAdminSection === "settings") return;
+  const title = config.title || activeAdminSection;
+  const listHtml = adminSectionItems.length
+    ? adminSectionItems.map((item) => {
+        const active = String(item._id) === String(activeAdminItemId);
+        return `<button type="button" class="admin-item${active ? " active" : ""}" data-admin-item="${item._id}"><strong>${resourceTitle(activeAdminSection, item)}</strong><small>${item._id}</small></button>`;
+      }).join("")
+    : `<p class="admin-empty">No records loaded.</p>`;
+
+  const currentItem = adminSectionItems.find((item) => String(item._id) === String(activeAdminItemId)) || resourceTemplate(activeAdminSection);
+  const payload = JSON.stringify(currentItem, null, 2);
+  adminWorkspace.innerHTML = `
+    <div class="admin-workspace-head">
+      <div>
+        <p class="eyebrow">Admin editor</p>
+        <h3>${title}</h3>
+      </div>
+      <div class="admin-workspace-actions">
+        <button type="button" class="secondary-btn" data-admin-create>Create new</button>
+        <button type="button" class="secondary-btn" data-admin-refresh>Refresh</button>
+      </div>
+    </div>
+    <div class="admin-workspace-grid">
+      <div class="admin-item-list">${listHtml}</div>
+      <form class="admin-json-form" id="adminJsonForm">
+        <label>
+          <span>${title} JSON</span>
+          <textarea id="adminJsonPayload" rows="18" spellcheck="false"></textarea>
+        </label>
+        <div class="settings-actions">
+          <button class="primary-btn" type="submit">Save ${title}</button>
+          <button class="secondary-btn" type="button" data-admin-delete>Delete</button>
+        </div>
+        <p class="form-status" id="adminEditorStatus" role="status"></p>
+      </form>
+    </div>
+  `;
+
+  const form = adminWorkspace.querySelector("#adminJsonForm");
+  const payloadField = adminWorkspace.querySelector("#adminJsonPayload");
+  const status = adminWorkspace.querySelector("#adminEditorStatus");
+  if (payloadField) payloadField.value = payload;
+
+  adminWorkspace.querySelectorAll("[data-admin-item]").forEach((button) => {
+    button.addEventListener("click", function() {
+      activeAdminItemId = button.dataset.adminItem;
+      renderAdminWorkspace();
+    });
+  });
+
+  const refreshButton = adminWorkspace.querySelector("[data-admin-refresh]");
+  if (refreshButton) refreshButton.addEventListener("click", loadAdminSection);
+
+  const createButton = adminWorkspace.querySelector("[data-admin-create]");
+  if (createButton) createButton.addEventListener("click", function() {
+    activeAdminItemId = "";
+    if (payloadField) payloadField.value = JSON.stringify(resourceTemplate(activeAdminSection), null, 2);
+    renderAdminWorkspace();
+  });
+
+  const deleteButton = adminWorkspace.querySelector("[data-admin-delete]");
+  if (deleteButton) deleteButton.addEventListener("click", async function() {
+    if (!activeAdminItemId) {
+      if (status) status.textContent = "Select a record to delete.";
+      return;
+    }
+    const endpoint = adminEndpoint(activeAdminSection);
+    const response = await fetch(`${endpoint}/${activeAdminItemId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      if (status) status.textContent = data.message || "Unable to delete record";
+      return;
+    }
+    activeAdminItemId = "";
+    if (status) status.textContent = "Deleted successfully.";
+    await loadAdminSection();
+  });
+
+  if (form) {
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      let parsed;
+      try {
+        parsed = JSON.parse(payloadField.value);
+      } catch (error) {
+        if (status) status.textContent = "Invalid JSON. Please correct the payload.";
+        return;
+      }
+      const endpoint = adminEndpoint(activeAdminSection);
+      const method = activeAdminItemId ? "PATCH" : "POST";
+      const url = activeAdminItemId ? `${endpoint}/${activeAdminItemId}` : endpoint;
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify(parsed),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (status) status.textContent = data.message || "Unable to save record";
+        return;
+      }
+      if (status) status.textContent = "Saved successfully.";
+      activeAdminItemId = String(data._id || activeAdminItemId || "");
+      await loadAdminSection();
+    });
+  }
 }
 
 async function loadSettings() {
@@ -757,6 +951,7 @@ const adminOpenButtons = document.querySelectorAll(".admin-open");
 const closeAdmin = document.querySelector("#closeAdmin");
 const adminLoginForm = document.querySelector("#adminLoginForm");
 const upiCheckout = document.querySelector("#upiCheckout");
+const adminToolButtons = document.querySelectorAll("[data-admin-section]");
 
 if (adminLoginButton && adminModal) {
   adminLoginButton.addEventListener("click", function() {
@@ -800,14 +995,19 @@ if (adminLoginForm) {
         if (!response.ok) throw new Error(data.message || "Login failed");
         setAuthTokens(data);
         if (adminStatus) adminStatus.textContent = "Login successful. Settings editor unlocked.";
-        if (settingsForm) settingsForm.hidden = false;
-        loadSettings();
+        showAdminSection("settings");
       })
       .catch((error) => {
         if (adminStatus) adminStatus.textContent = error.message;
       });
   });
 }
+
+adminToolButtons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    showAdminSection(button.dataset.adminSection);
+  });
+});
 
 if (settingsForm) {
   settingsForm.addEventListener("submit", async function(event) {
