@@ -186,21 +186,197 @@ const settingsCache = {
 };
 const apiBase = (window.DOG_MITRA_CONFIG && window.DOG_MITRA_CONFIG.apiBaseUrl) || window.API_BASE_URL || "https://dog-mitra-backend.onrender.com/api";
 const adminSectionConfigs = {
-  products: { title: "Products", endpoint: "/products", itemLabel: (item) => item.name || item.slug || item.sku || item._id, template: { name: "", slug: "", sku: "", categoryId: "", description: "", price: 0, active: true, featured: false, images: [] } },
-  appointments: { title: "Appointments", endpoint: "/appointments", itemLabel: (item) => item.reason || item._id, template: { customerId: "", petId: "", scheduledAt: "", reason: "", status: "requested" } },
-  orders: { title: "Orders", endpoint: "/orders", itemLabel: (item) => item.orderNumber || item._id, template: { orderNumber: "", customerId: "", items: [], subtotal: 0, totalAmount: 0, status: "pending" } },
-  content: { title: "Content", endpoint: "/services", itemLabel: (item) => item.title || item._id, template: { title: "", slug: "", summary: "", description: "", active: true, featured: false } },
-  blogs: { title: "News & Blogs", endpoint: "/blog-posts", itemLabel: (item) => item.title || item.slug || item._id, template: { title: "", slug: "", excerpt: "", content: "", status: "draft", featured: false } },
-  events: { title: "Events", endpoint: "/events", itemLabel: (item) => item.title || item.slug || item._id, template: { title: "", slug: "", summary: "", eventDate: "", status: "draft", registrationEnabled: true, featured: false } },
+  products: {
+    title: "Products",
+    endpoint: "/products",
+    itemLabel: (item) => item.name || item.slug || item.sku || item._id,
+    template: { name: "", slug: "", sku: "", categoryId: "", description: "", price: 0, active: true, featured: false, images: [] },
+    fields: [
+      { name: "name", label: "Product name", type: "text", required: true, placeholder: "Soft dog food for sensitive digestion" },
+      { name: "slug", label: "URL slug", type: "text", required: true, placeholder: "sensitive-digestive-dog-food" },
+      { name: "sku", label: "SKU", type: "text", required: true, placeholder: "DM-P-001" },
+      { name: "categoryId", label: "Category ID", type: "text", required: true, placeholder: "MongoDB category id" },
+      { name: "description", label: "Description", type: "textarea", required: true, rows: 5, placeholder: "Short product description for pet parents." },
+      { name: "price", label: "Price", type: "number", required: true, min: 0, step: "0.01" },
+      { name: "images", label: "Image URLs", type: "textarea", rows: 4, help: "One image URL per line." },
+      { name: "featured", label: "Featured product", type: "checkbox" },
+      { name: "active", label: "Available on website", type: "checkbox" },
+    ],
+  },
+  appointments: {
+    title: "Appointments",
+    endpoint: "/appointments",
+    itemLabel: (item) => item.reason || item._id,
+    template: { customerId: "", petId: "", scheduledAt: "", reason: "", status: "requested" },
+    fields: [
+      { name: "customerId", label: "Customer ID", type: "text", required: true, placeholder: "MongoDB customer id" },
+      { name: "petId", label: "Pet ID", type: "text", required: true, placeholder: "MongoDB pet id" },
+      { name: "scheduledAt", label: "Appointment date and time", type: "datetime-local", required: true },
+      { name: "reason", label: "Reason for visit", type: "textarea", required: true, rows: 4, placeholder: "Vaccination, consultation, follow-up..." },
+      { name: "status", label: "Status", type: "select", options: ["requested", "confirmed", "rescheduled", "completed", "cancelled", "no_show"] },
+    ],
+  },
+  orders: {
+    title: "Orders",
+    endpoint: "/orders",
+    itemLabel: (item) => item.orderNumber || item._id,
+    template: { orderNumber: "", customerId: "", items: [], subtotal: 0, totalAmount: 0, status: "pending" },
+    fields: [
+      { name: "orderNumber", label: "Order number", type: "text", required: true, placeholder: "DM-ORD-1001" },
+      { name: "customerId", label: "Customer ID", type: "text", required: true, placeholder: "MongoDB customer id" },
+      { name: "items", label: "Order items", type: "textarea", rows: 5, help: "One item per line: productId | name | sku | quantity | unit price | variant label." },
+      { name: "subtotal", label: "Subtotal", type: "number", required: true, min: 0, step: "0.01" },
+      { name: "totalAmount", label: "Total amount", type: "number", required: true, min: 0, step: "0.01" },
+      { name: "status", label: "Status", type: "select", options: ["pending", "paid", "packed", "shipped", "delivered", "cancelled", "refunded"] },
+    ],
+  },
+  content: {
+    title: "Services",
+    endpoint: "/services",
+    itemLabel: (item) => item.title || item._id,
+    template: { title: "", slug: "", summary: "", description: "", active: true, featured: false },
+    fields: [
+      { name: "title", label: "Service title", type: "text", required: true, placeholder: "Clinic consultation" },
+      { name: "slug", label: "URL slug", type: "text", required: true, placeholder: "clinic-consultation" },
+      { name: "summary", label: "Short summary", type: "textarea", required: true, rows: 3, placeholder: "One or two lines that explain the service." },
+      { name: "description", label: "Full description", type: "textarea", required: true, rows: 6, placeholder: "Describe the service in plain language for pet parents." },
+      { name: "active", label: "Visible on website", type: "checkbox" },
+      { name: "featured", label: "Featured service", type: "checkbox" },
+    ],
+  },
+  blogs: {
+    title: "News & Blogs",
+    endpoint: "/blog-posts",
+    itemLabel: (item) => item.title || item.slug || item._id,
+    template: { title: "", slug: "", excerpt: "", content: "", status: "draft", featured: false },
+    fields: [
+      { name: "title", label: "Article title", type: "text", required: true, placeholder: "How to prepare your dog for a clinic visit" },
+      { name: "slug", label: "URL slug", type: "text", required: true, placeholder: "prepare-your-dog-for-clinic-visit" },
+      { name: "excerpt", label: "Short excerpt", type: "textarea", required: true, rows: 3, placeholder: "Short summary shown on the website card." },
+      { name: "content", label: "Article content", type: "textarea", required: true, rows: 8, placeholder: "Write the full blog post here." },
+      { name: "status", label: "Publish status", type: "select", options: ["draft", "scheduled", "published", "archived"] },
+      { name: "featured", label: "Featured article", type: "checkbox" },
+    ],
+  },
+  events: {
+    title: "Events",
+    endpoint: "/events",
+    itemLabel: (item) => item.title || item.slug || item._id,
+    template: { title: "", slug: "", summary: "", eventDate: "", status: "draft", registrationEnabled: true, featured: false },
+    fields: [
+      { name: "title", label: "Event title", type: "text", required: true, placeholder: "Vaccination awareness day" },
+      { name: "slug", label: "URL slug", type: "text", required: true, placeholder: "vaccination-awareness-day" },
+      { name: "summary", label: "Short summary", type: "textarea", required: true, rows: 3, placeholder: "A short event description." },
+      { name: "eventDate", label: "Event date", type: "date", required: true },
+      { name: "status", label: "Publish status", type: "select", options: ["draft", "published", "archived"] },
+      { name: "registrationEnabled", label: "Registration open", type: "checkbox" },
+      { name: "featured", label: "Featured event", type: "checkbox" },
+    ],
+  },
   settings: { title: "Settings", endpoint: null },
-  faqs: { title: "FAQs", endpoint: "/faqs", itemLabel: (item) => item.question || item._id, template: { question: "", answer: "", category: "", active: true, sortOrder: 0 } },
-  testimonials: { title: "Testimonials", endpoint: "/testimonials", itemLabel: (item) => item.customerName || item._id, template: { customerName: "", rating: 5, quote: "", approved: false, featured: false } },
-  gallery: { title: "Gallery", endpoint: "/gallery", itemLabel: (item) => item.title || item._id, template: { title: "", category: "general", mediaUrl: "", altText: "", active: true, featured: false } },
-  customers: { title: "Customers", endpoint: "/customers", itemLabel: (item) => item.name || item.phone || item._id, template: { name: "", phone: "", active: true } },
-  pets: { title: "Pets", endpoint: "/pets", itemLabel: (item) => item.name || item._id, template: { customerId: "", name: "", species: "dog", breed: "", active: true } },
-  inventory: { title: "Inventory", endpoint: "/inventory", itemLabel: (item) => item.sku || item._id, template: { productId: "", sku: "", stockOnHand: 0, reservedStock: 0, reorderLevel: 0 } },
-  staff: { title: "Staff", endpoint: "/staff", itemLabel: (item) => item.name || item.username || item._id, template: { name: "", username: "", email: "", phone: "", role: "support", active: true } },
-  categories: { title: "Categories", endpoint: "/categories", itemLabel: (item) => item.name || item.slug || item._id, template: { name: "", slug: "", active: true } },
+  faqs: {
+    title: "FAQs",
+    endpoint: "/faqs",
+    itemLabel: (item) => item.question || item._id,
+    template: { question: "", answer: "", category: "", active: true, sortOrder: 0 },
+    fields: [
+      { name: "question", label: "Question", type: "text", required: true, placeholder: "What should I bring for my pet's appointment?" },
+      { name: "answer", label: "Answer", type: "textarea", required: true, rows: 5, placeholder: "Write the helpful answer in plain language." },
+      { name: "category", label: "Category", type: "text", placeholder: "Appointments" },
+      { name: "sortOrder", label: "Sort order", type: "number", min: 0, step: 1 },
+      { name: "active", label: "Visible on website", type: "checkbox" },
+    ],
+  },
+  testimonials: {
+    title: "Testimonials",
+    endpoint: "/testimonials",
+    itemLabel: (item) => item.customerName || item._id,
+    template: { customerName: "", rating: 5, quote: "", approved: false, featured: false },
+    fields: [
+      { name: "customerName", label: "Customer name", type: "text", required: true, placeholder: "A happy pet parent" },
+      { name: "rating", label: "Rating", type: "number", required: true, min: 1, max: 5, step: 1 },
+      { name: "quote", label: "Review text", type: "textarea", required: true, rows: 5, placeholder: "What did the customer say?" },
+      { name: "approved", label: "Approved for website", type: "checkbox" },
+      { name: "featured", label: "Featured review", type: "checkbox" },
+    ],
+  },
+  gallery: {
+    title: "Gallery",
+    endpoint: "/gallery",
+    itemLabel: (item) => item.title || item._id,
+    template: { title: "", category: "general", mediaUrl: "", altText: "", active: true, featured: false },
+    fields: [
+      { name: "title", label: "Image title", type: "text", required: true, placeholder: "Dog consultation in clinic" },
+      { name: "category", label: "Category", type: "select", options: ["clinic", "pets", "events", "customers", "treatments", "facilities", "general"] },
+      { name: "mediaUrl", label: "Image URL", type: "url", required: true, placeholder: "https://..." },
+      { name: "altText", label: "Alt text", type: "text", required: true, placeholder: "Veterinarian examining a dog" },
+      { name: "featured", label: "Featured image", type: "checkbox" },
+      { name: "active", label: "Visible on website", type: "checkbox" },
+    ],
+  },
+  customers: {
+    title: "Customers",
+    endpoint: "/customers",
+    itemLabel: (item) => item.name || item.phone || item._id,
+    template: { name: "", phone: "", active: true },
+    fields: [
+      { name: "name", label: "Customer name", type: "text", required: true, placeholder: "Pet parent name" },
+      { name: "phone", label: "Phone number", type: "text", required: true, placeholder: "+91..." },
+      { name: "email", label: "Email", type: "email", placeholder: "Optional email address" },
+      { name: "active", label: "Active customer", type: "checkbox" },
+    ],
+  },
+  pets: {
+    title: "Pets",
+    endpoint: "/pets",
+    itemLabel: (item) => item.name || item._id,
+    template: { customerId: "", name: "", species: "dog", breed: "", active: true },
+    fields: [
+      { name: "customerId", label: "Customer ID", type: "text", required: true, placeholder: "MongoDB customer id" },
+      { name: "name", label: "Pet name", type: "text", required: true, placeholder: "Pet name" },
+      { name: "species", label: "Species", type: "select", options: ["dog", "cat", "bird", "other"] },
+      { name: "breed", label: "Breed", type: "text", required: true, placeholder: "Breed name" },
+      { name: "active", label: "Active pet record", type: "checkbox" },
+    ],
+  },
+  inventory: {
+    title: "Inventory",
+    endpoint: "/inventory",
+    itemLabel: (item) => item.sku || item._id,
+    template: { productId: "", sku: "", stockOnHand: 0, reservedStock: 0, reorderLevel: 0 },
+    fields: [
+      { name: "productId", label: "Product ID", type: "text", required: true, placeholder: "MongoDB product id" },
+      { name: "sku", label: "SKU", type: "text", required: true, placeholder: "DM-P-001" },
+      { name: "stockOnHand", label: "Stock on hand", type: "number", required: true, min: 0, step: 1 },
+      { name: "reservedStock", label: "Reserved stock", type: "number", required: true, min: 0, step: 1 },
+      { name: "reorderLevel", label: "Reorder level", type: "number", required: true, min: 0, step: 1 },
+    ],
+  },
+  staff: {
+    title: "Staff",
+    endpoint: "/staff",
+    itemLabel: (item) => item.name || item.username || item._id,
+    template: { name: "", username: "", email: "", phone: "", role: "support", active: true },
+    fields: [
+      { name: "name", label: "Staff name", type: "text", required: true, placeholder: "Team member name" },
+      { name: "username", label: "Username", type: "text", required: true, placeholder: "username" },
+      { name: "email", label: "Email", type: "email", required: true, placeholder: "staff@example.com" },
+      { name: "phone", label: "Phone number", type: "text", required: true, placeholder: "+91..." },
+      { name: "role", label: "Role", type: "select", options: ["admin", "doctor", "receptionist", "inventory", "content", "support"] },
+      { name: "active", label: "Active staff", type: "checkbox" },
+    ],
+  },
+  categories: {
+    title: "Categories",
+    endpoint: "/categories",
+    itemLabel: (item) => item.name || item.slug || item._id,
+    template: { name: "", slug: "", active: true },
+    fields: [
+      { name: "name", label: "Category name", type: "text", required: true, placeholder: "Dog food" },
+      { name: "slug", label: "URL slug", type: "text", required: true, placeholder: "dog-food" },
+      { name: "active", label: "Visible on website", type: "checkbox" },
+    ],
+  },
 };
 let activeAdminSection = "settings";
 let activeAdminItemId = "";
@@ -251,6 +427,168 @@ function resourceTitle(section, item) {
   return config?.itemLabel ? config.itemLabel(item) : item?.title || item?._id || "Item";
 }
 
+function humanizeAdminField(name) {
+  return String(name)
+    .replace(/\./g, " ")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, function(match) { return match.toUpperCase(); });
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function getByPath(object, path) {
+  return String(path).split(".").reduce(function(value, key) {
+    return value && Object.prototype.hasOwnProperty.call(value, key) ? value[key] : undefined;
+  }, object);
+}
+
+function setByPath(object, path, value) {
+  const keys = String(path).split(".");
+  let cursor = object;
+  for (let index = 0; index < keys.length - 1; index += 1) {
+    const key = keys[index];
+    if (!cursor[key] || typeof cursor[key] !== "object") cursor[key] = {};
+    cursor = cursor[key];
+  }
+  cursor[keys[keys.length - 1]] = value;
+}
+
+function toTextareaValue(value) {
+  if (Array.isArray(value)) {
+    return value.map(function(item) {
+      if (typeof item === "string") return item;
+      if (item && typeof item === "object") return Object.values(item).filter(Boolean).join(" | ");
+      return "";
+    }).filter(Boolean).join("\n");
+  }
+  if (value == null) return "";
+  return String(value);
+}
+
+function parseFieldValue(field, value, checked) {
+  if (field.type === "checkbox") return Boolean(checked);
+  if (field.type === "number") {
+    if (value === "") return "";
+    const parsed = Number(value);
+    return Number.isNaN(parsed) ? "" : parsed;
+  }
+  if (field.type === "datetime-local") {
+    return value ? new Date(value).toISOString() : "";
+  }
+  if (field.type === "date") {
+    return value ? new Date(`${value}T00:00:00`).toISOString() : "";
+  }
+  if (field.name === "items") {
+    return value.split("\n").map(function(line) {
+      const parts = line.split("|").map(function(part) { return part.trim(); }).filter(Boolean);
+      return {
+        productId: parts[0] || "",
+        name: parts[1] || parts[0] || "",
+        sku: parts[2] || "",
+        quantity: Number(parts[3] || 1),
+        unitPrice: Number(parts[4] || 0),
+        variantLabel: parts[5] || "",
+      };
+    }).filter(function(item) { return item.productId || item.name; });
+  }
+  if (field.type === "textarea" && (field.listMode === "lines" || ["images", "benefits", "tags", "languages", "enabledLanguages"].includes(field.name))) {
+    return value.split("\n").map(function(line) { return line.trim(); }).filter(Boolean);
+  }
+  return value;
+}
+
+function formatDateTimeLocal(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const offset = date.getTimezoneOffset() * 60000;
+  return new Date(date.getTime() - offset).toISOString().slice(0, 16);
+}
+
+function formatDateOnly(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toISOString().slice(0, 10);
+}
+
+function normalizeAdminFormValue(field, value) {
+  if (field.type === "checkbox") return Boolean(value);
+  if (field.type === "datetime-local") return formatDateTimeLocal(value);
+  if (field.type === "date") return formatDateOnly(value);
+  return toTextareaValue(value);
+}
+
+function renderAdminField(field, currentItem) {
+  const value = normalizeAdminFormValue(field, getByPath(currentItem, field.name));
+  const required = field.required ? "required" : "";
+  const label = field.label || humanizeAdminField(field.name);
+  const helpHtml = field.help ? `<small class="admin-field-help">${escapeHtml(field.help)}</small>` : "";
+
+  if (field.type === "select") {
+    return `
+      <label class="admin-field ${field.wide ? "wide" : ""}">
+        <span>${label}</span>
+        <select data-field="${field.name}" ${required}>
+          ${(field.options || []).map(function(option) {
+            const selected = String(option) === String(value) ? "selected" : "";
+            return `<option value="${escapeHtml(option)}" ${selected}>${escapeHtml(option)}</option>`;
+          }).join("")}
+        </select>
+        ${helpHtml}
+      </label>
+    `;
+  }
+
+  if (field.type === "textarea") {
+    return `
+      <label class="admin-field ${field.wide ? "wide" : ""}">
+        <span>${label}</span>
+        <textarea data-field="${field.name}" rows="${field.rows || 4}" placeholder="${escapeHtml(field.placeholder || "")}" ${required}>${escapeHtml(value)}</textarea>
+        ${helpHtml}
+      </label>
+    `;
+  }
+
+  if (field.type === "checkbox") {
+    return `
+      <label class="admin-field admin-check ${field.wide ? "wide" : ""}">
+        <input data-field="${field.name}" type="checkbox" ${value ? "checked" : ""}>
+        <span>${label}</span>
+        ${helpHtml}
+      </label>
+    `;
+  }
+
+  return `
+    <label class="admin-field ${field.wide ? "wide" : ""}">
+      <span>${label}</span>
+      <input data-field="${field.name}" type="${field.type || "text"}" value="${escapeHtml(value)}" placeholder="${escapeHtml(field.placeholder || "")}" ${field.min != null ? `min="${field.min}"` : ""} ${field.max != null ? `max="${field.max}"` : ""} ${field.step != null ? `step="${field.step}"` : ""} ${required}>
+      ${helpHtml}
+    </label>
+  `;
+}
+
+function buildAdminPayloadFromForm(form, section) {
+  const config = adminSectionConfigs[section];
+  const payload = {};
+  (config.fields || []).forEach(function(field) {
+    const input = form.querySelector(`[data-field="${field.name}"]`);
+    if (!input) return;
+    const value = parseFieldValue(field, input.value, input.checked);
+    setByPath(payload, field.name, value);
+  });
+  return payload;
+}
+
 async function loadAdminSection() {
   const endpoint = adminEndpoint(activeAdminSection);
   if (!endpoint) return;
@@ -278,12 +616,14 @@ function renderAdminWorkspace() {
   const listHtml = adminSectionItems.length
     ? adminSectionItems.map((item) => {
         const active = String(item._id) === String(activeAdminItemId);
-        return `<button type="button" class="admin-item${active ? " active" : ""}" data-admin-item="${item._id}"><strong>${resourceTitle(activeAdminSection, item)}</strong><small>${item._id}</small></button>`;
+        return `<button type="button" class="admin-item${active ? " active" : ""}" data-admin-item="${item._id}"><strong>${escapeHtml(resourceTitle(activeAdminSection, item))}</strong><small>${escapeHtml(item._id)}</small></button>`;
       }).join("")
     : `<p class="admin-empty">No records loaded.</p>`;
 
   const currentItem = adminSectionItems.find((item) => String(item._id) === String(activeAdminItemId)) || resourceTemplate(activeAdminSection);
-  const payload = JSON.stringify(currentItem, null, 2);
+  const fieldsHtml = (config.fields || []).map(function(field) {
+    return renderAdminField(field, currentItem);
+  }).join("");
   adminWorkspace.innerHTML = `
     <div class="admin-workspace-head">
       <div>
@@ -297,11 +637,10 @@ function renderAdminWorkspace() {
     </div>
     <div class="admin-workspace-grid">
       <div class="admin-item-list">${listHtml}</div>
-      <form class="admin-json-form" id="adminJsonForm">
-        <label>
-          <span>${title} JSON</span>
-          <textarea id="adminJsonPayload" rows="18" spellcheck="false"></textarea>
-        </label>
+      <form class="admin-data-form" id="adminDataForm">
+        <div class="admin-form-grid">
+          ${fieldsHtml}
+        </div>
         <div class="settings-actions">
           <button class="primary-btn" type="submit">Save ${title}</button>
           <button class="secondary-btn" type="button" data-admin-delete>Delete</button>
@@ -311,10 +650,8 @@ function renderAdminWorkspace() {
     </div>
   `;
 
-  const form = adminWorkspace.querySelector("#adminJsonForm");
-  const payloadField = adminWorkspace.querySelector("#adminJsonPayload");
+  const form = adminWorkspace.querySelector("#adminDataForm");
   const status = adminWorkspace.querySelector("#adminEditorStatus");
-  if (payloadField) payloadField.value = payload;
 
   adminWorkspace.querySelectorAll("[data-admin-item]").forEach((button) => {
     button.addEventListener("click", function() {
@@ -329,7 +666,6 @@ function renderAdminWorkspace() {
   const createButton = adminWorkspace.querySelector("[data-admin-create]");
   if (createButton) createButton.addEventListener("click", function() {
     activeAdminItemId = "";
-    if (payloadField) payloadField.value = JSON.stringify(resourceTemplate(activeAdminSection), null, 2);
     renderAdminWorkspace();
   });
 
@@ -357,13 +693,7 @@ function renderAdminWorkspace() {
   if (form) {
     form.addEventListener("submit", async function(event) {
       event.preventDefault();
-      let parsed;
-      try {
-        parsed = JSON.parse(payloadField.value);
-      } catch (error) {
-        if (status) status.textContent = "Invalid JSON. Please correct the payload.";
-        return;
-      }
+      const parsed = buildAdminPayloadFromForm(form, activeAdminSection);
       const endpoint = adminEndpoint(activeAdminSection);
       const method = activeAdminItemId ? "PATCH" : "POST";
       const url = activeAdminItemId ? `${endpoint}/${activeAdminItemId}` : endpoint;
