@@ -4,6 +4,7 @@ const { authController } = require("../modules/auth/auth.controller");
 const { authenticate, authorize } = require("../middlewares/auth");
 const { createResourceModule } = require("../modules/resourceFactory");
 const { settingsRouter } = require("./settings.routes");
+const { publicRouter } = require("./public.routes");
 const models = require("../../models");
 
 const router = express.Router();
@@ -37,6 +38,7 @@ router.use("/faqs", createResourceModule(models.FAQ, ["admin", "content"]).route
 router.use("/contact-information", createResourceModule(models.ContactInformation, ["admin", "content"]).router);
 router.use("/site-settings", createResourceModule(models.SiteSettings, ["admin"]).router);
 router.use("/settings", settingsRouter);
+router.use("/public", publicRouter);
 
 router.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 router.get("/health/db", async (_req, res, next) => {
