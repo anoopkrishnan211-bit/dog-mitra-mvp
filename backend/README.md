@@ -60,6 +60,7 @@ This folder contains the production backend for Dog Mitra.
 - `GET /public/gallery`
 - `GET /public/testimonials`
 - `GET /public/events`
+- `GET /public/settings`
 
 ## Notes
 
